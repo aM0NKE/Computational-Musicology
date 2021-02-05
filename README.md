@@ -30,6 +30,6 @@ I've highlighted these songs because they all poses a childlike quality, a featu
 +All of the albums have been classified as outsider music, without much debate. Except for that one time that B.J. Snowden criticised Chusid because she felt she did not belong on his list of outsiders.
 
 -The artists all have a very unique style of making music.
-
+\minus
 
  
