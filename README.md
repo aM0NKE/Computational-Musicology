@@ -27,7 +27,7 @@ I decided to pick these albums mainly because they were created by outisder musi
 I've highlighted these songs because they all poses a childlike quality, a feature that is often mentioned as a characteristic of outsider music. It will be interesting to see if this quality would in someway be reflected in the metrics. It might not be enough to confidently catogorize outsider music, but it could be a starting point.
  
 ### Strengths and limitations of the corpus:
- + + All of the albums have been classified as outsider music, without much debate. Except for that one time that B.J. Snowden criticised Chusid because she felt she did not belong on his list of outsiders.
+ + $+$ All of the albums have been classified as outsider music, without much debate. Except for that one time that B.J. Snowden criticised Chusid because she felt she did not belong on his list of outsiders.
  + 
  -
  
