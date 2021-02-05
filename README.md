@@ -5,7 +5,7 @@ Outsider music is a derrivative of <a href="https://www.britannica.com/art/outsi
 
 In 2000, Irwin Chusid released his book: Songs in the Key of Z, a book that explores the field of outsider music by highlighting its most prominent artists. Chusid defines outsider music as "crackpot and visionary music, where all trails lead essentially one place: over the edge." The book was accompanied by two compilation albums that featured a variety of outsider musicians. My corpus will consist of albums from artists that can be found on these compilation albums.
 
-Corpus:
+Corpus:+
  -  Life In the USA and Canada, by B.J. Snowden
  -  Eilart Is Back, by Eilert Pilram
  -  Rock 'N' Roll Will Never Die, Wesley Willis
