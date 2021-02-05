@@ -24,6 +24,7 @@ I decided to pick these albums mainly because they were created by outsider musi
 - Livin' In the Sunlight, Lovin' In the Moon Light, by Tiny Tim
 - Who Are Parents?, by The Shaggs 
 - The Beatles, by Daniel Johnston
+
 I've highlighted these songs for two reasons, (1) because they all possess a childlike quality, a feature that is often mentioned as a characteristic of outsider music; (2) and because I wanted to examine at least one song of every artist in the corpus in more detail. It will be interesting to see if the childlike quality would in some way be reflected in the metrics, valence could show to be fruitful, as optimism and positivity are common traits of childlike music. It might not be enough to confidently categorize outsider music, but it could be a starting point.
  
 ### Strengths and limitations of the corpus:
