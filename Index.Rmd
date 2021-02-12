@@ -1,28 +1,20 @@
 ---
-title: "Index"
+title: "Computational Musicology Portfolio"
+author: "River Vaudrin"
+date: "15 February 2021"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r}
+library(tidyverse)
+library(spotifyr)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r}
+snowden <- get_album_tracks("1EyK7iSwGyzGgqkFsigXJC")
+eilert <- get_album_tracks("1ijZSzZzhcK8WXJq4Kj3Wa")
+willis <- get_album_tracks("4Zt5GnqGEzomd4rKBr3cWR")
+tim <- get_album_tracks("6Oimi4JAkSAH3qhZmswoE9")
+shaggs <- get_album_tracks("0TzI1YcMAQVdQ4yUZuy7fA")
+daniel <- get_album_tracks("5DHk0BirTuqIgsVgpw3sBT")
 ```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
