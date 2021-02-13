@@ -6,14 +6,20 @@ output: html_document
 ---
 
 ## Introduction:
- Outsider music is a derivative of <a href="https://www.britannica.com/art/outsider-art">outsider art</a>, which is defined as "any work of art produced by an untrained idiosyncratic artist who is typically unconnected to the conventional art world—not by choice but by circumstance." Its defining feature is "the tendency of the artists to be “straight talking” (even if that talk is straight from a radically different worldview)." 
+Outsider music is a derivative of <a href="https://www.britannica.com/art/outsider-art">outsider art</a>, which is defined as "any work of art produced by an untrained idiosyncratic artist who is typically unconnected to the conventional art world—not by choice but by circumstance." Its defining feature is "the tendency of the artists to be “straight talking” (even if that talk is straight from a radically different worldview)." In 2000, Irwin Chusid conceptualized the term outsider music in his book: Songs in the Key of Z, in which he explores the field of outsider music by highlighting its most prominent artists. Chusid defines outsider music as "crackpot and visionary music, where all trails lead essentially one place: over the edge." The book was accompanied by two compilation albums that featured a variety of outsider musicians. 
 
-In 2000, Irwin Chusid conceptualized the term outsider music in his book: Songs in the Key of Z, in which he explores the field of outsider music by highlighting its most prominent artists. Chusid defines outsider music as "crackpot and visionary music, where all trails lead essentially one place: over the edge." The book was accompanied by two compilation albums that featured a variety of outsider musicians. My corpus will consist of albums from artists that can be found on these compilation albums. The goal is to analyze the corpus with metrics provided by Spotify, and determine whether it is possible to categorize these outsider musicians on the basis of these metrics.
+These definitions are quite vague, however, I think that we can make it less ambiguous if we look at the differences between outsider musicians and other idiosyncratic musicians that make unconventional music. The first difference is that outsider musicians create unconventional art by circumstance, and not by choice. "By circumstance" can be interpreted in multiple ways. One interpretation is easily noticeable from Chusid's categorization, and that is most of the artists have some kind of mental disorder. Tiny Tim had Asperger's syndrome, Wesley Willis was a schizophrenic, and Daniel Johnson was both schizophrenic and bipolar. In other words, their unconventionality stemmed from their disorders. Another interpretation is exemplified by The Shaggs, they were a band comprised of three teenage sisters in 1968 formed by their father. One day their father received news from his fortune teller mother that his daughters would become famous musicians, even though his daughters didn't have any experience in making music. Although, after hearing this prophecy he withdrew his daughters from school and sold some family belongings to buy his daughters' instruments, and so the band was formed. These kids essentially had no choice than to play music, and their inexperience shines trough on their first album Philosophy of the World. 
+
+Another key difference that sets outsider musicians apart is the amateurish sound of their music. If the definition of an outsider musician is a musician that makes unconventional music by circumstance, then we could consider Beach Boys' Brian Wilson as an outsider musician, as he was, like Daniel Johnson, diagnosed with schizophrenia and bipolar disorder. However, Wilson's music is far more commercially successful than all of the outsider musicians mentioned by Chusid, I think that this is due to the fact that his music doesn't poses an amateurish quality. In summary, his means that the two defining features of outsider music are that it sounds amateuristic, and that it sounds unconventional because of the circumstances the musicians find themselves in. 
+
+My corpus will consist of albums from artists that can be found on the compilation albums of Chusid's Songs in the Key of Z. The goal is to analyze the corpus with metrics provided by Spotify, and determine whether it is possible to categorize these outsider musicians on the basis of these metrics.
+
+
 
 ## Corpus:
  -  Life In the USA and Canada, by B.J. Snowden
  -  Eilart Is Back, by Eilert Pilram
- -  Greatest Hits, Wesley Willis
+ -  Rush Hour, Wesley Willis
  -  God Bless Tiny Tim, by Tiny Tim
  -  Philosophy of the World, by The Shaggs
  -  Yip! Jump Music, by Daniel Johnston
@@ -24,12 +30,12 @@ I decided to pick these albums mainly because they were created by outsider musi
 ### Interesting songs
 - In Canada, by B.J Snowden
 - Suspicious Minds, by Eilert Pilram
-- I Wupped Batman's Ass, by Wesley
+- I Wipped Batman's Ass, by Wesley Willis
 - Livin' In the Sunlight, Lovin' In the Moon Light, by Tiny Tim
 - Who Are Parents?, by The Shaggs 
 - The Beatles, by Daniel Johnston
 
-I've highlighted these songs for two reasons, (1) because they all possess a childlike quality, a feature that is often mentioned as a characteristic of outsider music; (2) and because I wanted to examine at least one song of every artist in the corpus in more detail. It will be interesting to see if the childlike quality would in some way be reflected in the metrics, valence could show to be fruitful, as optimism and positivity are common traits of childlike music. It might not be enough to confidently categorize outsider music, but it could be a starting point.
+I've highlighted these songs for two reasons, (1) because they all possess a childlike quality, a feature that is often mentioned as a characteristic of outsider music; (2) and because I wanted to examine at least one song of every artist in the corpus in more detail. It will be interesting to see if the childlike quality would in some way be reflected in the metrics, valence and energy could show to be fruitful, as optimism, energy and positivity are common traits of childlike music. It might not be enough to confidently categorize outsider music, but it could be a starting point.
  
 ### Strengths and limitations of the corpus:
 -The artists all have a very unique style of making music.
