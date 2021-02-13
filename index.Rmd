@@ -1,0 +1,58 @@
+---
+title: "Computational Musicology Portfolio"
+author: "River Vaudrin"
+date: "15 February 2021"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(spotifyr)
+```
+
+```{r}
+# Load entire discography 
+snowden_disc <- get_artist_audio_features("12XwWwI5wcnQySACjbgf2y")
+eilert_disc <- get_artist_audio_features("7aS6aXw9eYfVQxCG1RcVEK")
+willis_disc <- get_artist_audio_features("50yovZJnAHoy0pBruvFaCR")
+tim_disc <- get_artist_audio_features("0Nc79lkTxXLSIIHDB8mqJC")
+shaggs_disc <- get_artist_audio_features("5ixdD9E7P9r51AOcSInQbl")
+daniel_disc <- get_artist_audio_features("1jeYbk5eqo6wgsQPjLeU5w")
+
+# Create new dataframe with all artists entire discography
+disc <- list(snowden_disc, eilert_disc, willis_disc, tim_disc, shaggs_disc, daniel_disc) %>%
+  reduce(full_join)
+
+# Load specific albums
+snowden_album <- subset(snowden_disc, album_name=="Life in the USA and Canada")
+eilert_album <- subset(eilert_disc, album_name=="Eilert Is Back")
+willis_album <- subset(willis_disc, album_name=="Rush Hour")
+tim_album <- subset(tim_disc, album_name=="God Bless Tiny Tim")
+shaggs_album <- subset(shaggs_disc, album_name=="Philosophy of the World" & album_id=="0TzI1YcMAQVdQ4yUZuy7fA")
+daniel_album <- subset(daniel_disc, album_name=="Yip Jump Music")
+
+# Create new dataframe with all albums
+albums <- list(snowden_album, eilert_album, willis_album, tim_album, shaggs_album, daniel_album) %>%
+  reduce(full_join)
+
+
+# Load specific tracks
+snowden_song <- subset(snowden_album, track_name=="In Canada")
+eilert_song <- subset(eilert_album, track_name=="Suspicious Minds")
+willis_song <- subset(willis_album, track_name=="I Whipped Batman's Ass")
+tim_song <- subset(tim_album, track_name=="Livin' in the Sunlight, Lovin' in the Moon Light")
+shaggs_song <- subset(shaggs_album, track_name=="Who Are Parents?")
+daniel_song <- subset(daniel_album, track_name=="The Beatles")
+
+# Create new dataframe with all songs
+songs <- list(snowden_song, eilert_song, willis_song, tim_song, shaggs_song, daniel_song) %>%
+  reduce(full_join)
+```
+
+```{r}
+
+ggplot(albums, aes(0, energy, color=artist_name)) +
+  geom_jitter()
+
+```
+
