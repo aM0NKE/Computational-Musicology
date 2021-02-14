@@ -54,6 +54,10 @@ I've highlighted these songs for two reasons, (1) because they all possess a chi
 ```{r}
 library(tidyverse)
 library(spotifyr)
+library(devtools)
+install_github("ndphillips/yarrr")
+library("yarrr")
+
 ```
 
 ### Load dataframes
@@ -97,9 +101,70 @@ songs <- list(snowden_song, eilert_song, willis_song, tim_song, shaggs_song, dan
 ```
 ### Explorative plots
 ```{r}
+mean_valence_energy <- albums %>% 
+  group_by(album_name) %>% 
+  summarise(artist_name = artist_name,
+            album_name = album_name,
+            valence = mean(valence),
+            energy  = mean(energy))
 
-ggplot(albums, aes(valence, energy, color=artist_name)) +
-  geom_point()
+song_mood_plot <- ggplot(albums, aes(energy, valence, color=artist_name, shape=artist_name)) +
+  geom_point(alpha=.45) +
+  geom_point(data=mean_valence_energy, size=4) +
+  geom_vline(xintercept=0.5, linetype="dotted") +
+  geom_hline(yintercept=0.5, linetype="dotted") +
+  theme_bw() +
+  xlim(0,1) +
+  ylim(0,1) +
+  labs(
+    title = "Song mood (corpus albums)",
+    x = "Energy",
+    y = "Valence",
+    color="Artist Name",
+    shape="Artist Name"
+  )
 
+song_mood_plot + annotate("text", x=.25, y=.25, label="Sad", alpha=.6) +
+                 annotate("text", x=.25, y=.75, label="Angry", alpha=.6) +
+                 annotate("text", x=.75, y=.25, label="Relaxed", alpha=.6) +
+                 annotate("text", x=.75, y=.75, label="Happy", alpha=.6) 
 ```
 
+```{r}
+mean_valence_energy_disc <- disc %>% 
+  group_by(artist_name) %>% 
+  summarise(artist_name = artist_name,
+            valence = mean(valence),
+            energy  = mean(energy))
+
+song_mood_plot <- ggplot(disc, aes(energy, valence, color=artist_name, shape=artist_name)) +
+  geom_point(alpha=.25) +
+  geom_point(data=mean_valence_energy_disc, size=4) +
+  geom_vline(xintercept=0.5, linetype="dotted") +
+  geom_hline(yintercept=0.5, linetype="dotted") +
+  theme_bw() +
+  xlim(0,1) +
+  ylim(0,1) +
+  labs(
+    title = "Song mood (entire discogrophy)",
+    x = "Energy",
+    y = "Valence",
+    color="Artist Name",
+    shape="Artist Name"
+  )
+
+song_mood_plot + annotate("text", x=.25, y=.25, label="Sad", alpha=.6) +
+                 annotate("text", x=.25, y=.75, label="Angry", alpha=.6) +
+                 annotate("text", x=.75, y=.25, label="Relaxed", alpha=.6) +
+                 annotate("text", x=.75, y=.75, label="Happy", alpha=.6) 
+```
+
+```{r}
+pirateplot(valence + energy + danceability ~ album_name,
+           albums, 
+           xlab = "album", ylab = "sonic score")
+
+
+
+
+```
