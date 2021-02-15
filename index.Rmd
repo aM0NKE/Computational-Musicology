@@ -169,6 +169,7 @@ song_mood_plot + annotate("text", x=.25, y=.25, label="Sad", alpha=.6) +
                  annotate("text", x=.75, y=.25, label="Angry", alpha=.6) +
                  annotate("text", x=.75, y=.75, label="Happy", alpha=.6) 
 ``` 
+
 Interestingly, for all of the artists the mood of their albums (the corpus) are consistent throughout their entire discographies. Thus the corpus is representable for the artists entire music catalog. Another assumption we can make based on this outcome is, that the artists did not experiment a lot when it comes to valence and energy troughout their careers.
 
 To examine the albums in more detail I wanted to examine the cohesiveness of each album. To determine the cohesiveness of each album I introduced a cohesiveness score, which is defined as follows:
@@ -196,6 +197,17 @@ ggplot(danceability_valence_energy_albums, aes(x=album_name, y=score, color=arti
 
 ```
 
+From these results we can observe a couple of findings. First, we can see that Wesley Willis's album is the most cohesive, meaning that all of his songs have a similar cohesiveness score. This is no surprise when we take into account that all of his songs have the exact same song structure, alongside the fact that all of his songs have a similar sound, something I am going to examine further in the coming weeks. Another finding is that Eilart Is Back, Godbless Tiny Tim and Yip Jump Music all have a high variance in cohesiveness score, meaning that they have a wide variety in songs (in the case of Eilart Pilarm's album this is not so strange, as it is essentially an Elvis compilation album). This is contrasted by Life In the USA and Canada and Philosophy of the World, which are albums that consist of songs that are more similar to eachother. 
+
+Next I wanted to determine what songs are outliers when it comes to speechiness and instrumentalness, which Spotify defines as:
+
+- Speechiness: detects the presence of spoken words in a track. The more exclusively speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value. Values above 0.66 describe tracks that are probably made entirely of spoken words. Values between 0.33 and 0.66 describe tracks that may contain both music and speech, either in sections or layered, including such cases as rap music. Values below 0.33 most likely represent music and other non-speech-like tracks.
+
+- Instrumentalness: predicts whether a track contains no vocals. “Ooh” and “aah” sounds are treated as instrumental in this context. Rap or spoken word tracks are clearly “vocal”. The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no vocal content. Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as the value approaches 1.0.
+
+To summarize, I want to see which songs are spoken word songs and which are instrumentals, the results can be seen in the two jitter plots below.
+
+
 ```{r}
 ggplot(albums, aes(x=album_name, y=speechiness, color=artist_name)) +
   geom_jitter(width=.2) +
@@ -208,7 +220,7 @@ ggplot(albums, aes(x=album_name, y=speechiness, color=artist_name)) +
 
 ```{r}
 ggplot(albums, aes(x=album_name, y=instrumentalness, color=artist_name)) +
-  geom_jitter(width=.4) +
+  geom_jitter(width=.5) +
   geom_text_repel(data=filter(albums, instrumentalness>0.5), aes(label=track_name), size=3) +
   # geom_text(aes(label=ifelse(instrumentalness>.5,as.character(track_name),'')),size=3,hjust=1,vjust=-.5) +
   ylim(0,1) +
@@ -216,3 +228,5 @@ ggplot(albums, aes(x=album_name, y=instrumentalness, color=artist_name)) +
   theme(axis.text.x = element_text(angle=40, hjust=1))
 
 ```
+
+Now that I have determined the spoken word and instrumental tracks, I could decide to exclude these out of the dataframe to compare the songs that have the most similar properties. This could lead to better comparisons that we can use to either determine what makes these musicians outsiders, or what the differences are between these outsider musicians.   
