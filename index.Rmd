@@ -189,7 +189,7 @@ ggplot(albums, aes(x=album_name, y=speechiness, color=artist_name)) +
 ```{r}
 ggplot(albums, aes(x=album_name, y=instrumentalness, color=artist_name)) +
   geom_jitter(width=.4) +
-  geom_text_repel(data=filter(albums, instrumentalness>0.5), aes(label=track_name)) +
+  geom_text_repel(data=filter(albums, instrumentalness>0.5), aes(label=track_name), size=3) +
   # geom_text(aes(label=ifelse(instrumentalness>.5,as.character(track_name),'')),size=3,hjust=1,vjust=-.5) +
   ylim(0,1) +
   labs(title = "Instrumental songs", x="Album name", y="Instrumentalness", color="Artist") +
