@@ -74,6 +74,7 @@ daniel_disc <- get_artist_audio_features("1jeYbk5eqo6wgsQPjLeU5w")
 disc <- list(snowden_disc, eilert_disc, willis_disc, tim_disc, shaggs_disc, daniel_disc) %>%
   reduce(full_join)
 
+
 # Load specific albums
 snowden_album <- subset(snowden_disc, album_name=="Life in the USA and Canada")
 eilert_album <- subset(eilert_disc, album_name=="Eilert Is Back")
@@ -160,9 +161,8 @@ song_mood_plot + annotate("text", x=.25, y=.25, label="Sad", alpha=.6) +
 ```
 
 ```{r}
-pirateplot(valence + energy + danceability ~ album_name,
-           albums, 
-           xlab = "album", ylab = "sonic score")
+dance_val_energy_plot <- pirateplot(valence + energy + danceability ~ album_name,
+           albums) 
 
 
 
