@@ -54,9 +54,8 @@ I've highlighted these songs for two reasons, (1) because they all possess a chi
 ```{r}
 library(tidyverse)
 library(spotifyr)
-library(devtools)
-install_github("ndphillips/yarrr")
-library("yarrr")
+library(ggrepel)
+
 
 ```
 
@@ -161,10 +160,39 @@ song_mood_plot + annotate("text", x=.25, y=.25, label="Sad", alpha=.6) +
 ```
 
 ```{r}
-dance_val_energy_plot <- pirateplot(valence + energy + danceability ~ album_name,
-           albums) 
+danceability_valence_energy_albums <- albums %>% 
+  group_by(artist_name) %>% 
+  summarise(artist_name = artist_name,
+            album_name = album_name,
+            score = valence + energy + danceability)
 
+ggplot(danceability_valence_energy_albums, aes(x=album_name, y=score, color=artist_name)) + 
+    geom_violin() +
+    geom_jitter(position=position_jitter(0.15), alpha=0.4) +
+    geom_boxplot(alpha=.2, width=.8) +
+    ylim(0,3) +
+    labs(title = "Album cohesiveness", x="Album name", y="Danceability + Valence + Energy", color="Artist") +
+    theme(axis.text.x = element_text(angle=40, hjust=1))
 
+```
 
+```{r}
+ggplot(albums, aes(x=album_name, y=speechiness, color=artist_name)) +
+  geom_jitter(width=.2) +
+  geom_text(aes(label=ifelse(speechiness>.66,as.character(track_name),'')),size=3,hjust=1,vjust=-.5) +
+  ylim(0,1) +
+  labs(title = "Spoken word songs", x="Album name", y="Speechiness", color="Artist") +
+  theme(axis.text.x = element_text(angle=40, hjust=1))
+
+```
+
+```{r}
+ggplot(albums, aes(x=album_name, y=instrumentalness, color=artist_name)) +
+  geom_jitter(width=.4) +
+  geom_text_repel(data=filter(albums, instrumentalness>0.5), aes(label=track_name)) +
+  # geom_text(aes(label=ifelse(instrumentalness>.5,as.character(track_name),'')),size=3,hjust=1,vjust=-.5) +
+  ylim(0,1) +
+  labs(title = "Instrumental songs", x="Album name", y="Instrumentalness", color="Artist") +
+  theme(axis.text.x = element_text(angle=40, hjust=1))
 
 ```
