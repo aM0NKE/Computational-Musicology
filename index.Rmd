@@ -100,6 +100,11 @@ songs <- list(snowden_song, eilert_song, willis_song, tim_song, shaggs_song, dan
   reduce(full_join)
 ```
 ### Explorative plots
+First I tried to determine the mood (relaxed, happy, angry or sad) of each album. I did this by using the valence and energy parameters. Spotify defines these as:
+- Valence: A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).
+- Energy: Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy.
+These parameters allow us to categorize the mood of each song. Next, if we compute the mean of the songs for each album, we can categorize the mood of each album. The results can be seen below. 
+
 ```{r}
 mean_valence_energy <- albums %>% 
   group_by(album_name) %>% 
@@ -125,11 +130,13 @@ song_mood_plot <- ggplot(albums, aes(energy, valence, color=artist_name, shape=a
   )
 
 song_mood_plot + annotate("text", x=.25, y=.25, label="Sad", alpha=.6) +
-                 annotate("text", x=.25, y=.75, label="Angry", alpha=.6) +
-                 annotate("text", x=.75, y=.25, label="Relaxed", alpha=.6) +
+                 annotate("text", x=.25, y=.75, label="Relaxed", alpha=.6) +
+                 annotate("text", x=.75, y=.25, label="Angry", alpha=.6) +
                  annotate("text", x=.75, y=.75, label="Happy", alpha=.6) 
 ```
+When we look at the results, we can observe that all albums are relatively close to the center of the plot. This means that we cannot confidently match any album to a certain mood. We can only conclude that Tiny Tim's album is less energetic than all of the other albums, and that Wesley Willis' album is more energetic than the other albums. Another interesting finding is that all of the albums are not overly positive or negative, all of the albums have a similar valence centered around 0.5. 
 
+The next step is to examine if these results are consitent over these artists' 
 ```{r}
 mean_valence_energy_disc <- disc %>% 
   group_by(artist_name) %>% 
