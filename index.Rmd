@@ -37,7 +37,7 @@ eilert_album <- subset(eilert_disc, album_name=="Eilert Is Back")
 willis_album <- subset(willis_disc, album_name=="Rush Hour")
 tim_album <- subset(tim_disc, album_name=="God Bless Tiny Tim")
 shaggs_album <- subset(shaggs_disc, album_name=="Philosophy of the World" & album_id=="0TzI1YcMAQVdQ4yUZuy7fA")
-daniel_album <- subset(daniel_disc, album_name=="Yip Jump Music")
+daniel_album <- subset(daniel_disc, album_name=="Yip / Jump Music")
 
 # Create new dataframe with all albums
 albums <- list(snowden_album, eilert_album, willis_album, tim_album, shaggs_album, daniel_album) %>%
@@ -107,10 +107,12 @@ mean_valence_energy <- albums %>%
   group_by(album_name) %>% 
   summarise(artist_name = artist_name,
             album_name = album_name,
+            track_name = track_name,
             valence = mean(valence),
             energy  = mean(energy))
 
-song_mood_plot <- ggplot(albums, aes(energy, valence, color=artist_name, shape=artist_name)) +
+
+song_mood_plot <- ggplot(albums, aes(energy, valence, color=artist_name, shape=album_name, label=track_name)) +
   geom_point(alpha=.45) +
   geom_point(data=mean_valence_energy, size=4) +
   geom_vline(xintercept=0.5, linetype="dotted") +
@@ -121,15 +123,16 @@ song_mood_plot <- ggplot(albums, aes(energy, valence, color=artist_name, shape=a
   labs(
     title = "Song mood (corpus albums)",
     x = "Energy",
-    y = "Valence",
-    color="Artist Name",
-    shape="Artist Name"
+    y = "Valence"
   )
 
-song_mood_plot + annotate("text", x=.25, y=.25, label="Sad", alpha=.6) +
+song_mood_plot <-song_mood_plot + 
+                 annotate("text", x=.25, y=.25, label="Sad", alpha=.6) +
                  annotate("text", x=.25, y=.75, label="Relaxed", alpha=.6) +
                  annotate("text", x=.75, y=.25, label="Angry", alpha=.6) +
                  annotate("text", x=.75, y=.75, label="Happy", alpha=.6) 
+
+ggplotly(song_mood_plot, width=1000, height=1000)
 ```
 
 ***
@@ -150,10 +153,12 @@ When we look at the results, we can observe that all albums are relatively close
 mean_valence_energy_disc <- disc %>% 
   group_by(artist_name) %>% 
   summarise(artist_name = artist_name,
+            album_name = album_name,
+            track_name = track_name,
             valence = mean(valence),
             energy  = mean(energy))
 
-song_mood_plot <- ggplot(disc, aes(energy, valence, color=artist_name, shape=artist_name)) +
+song_mood_plot <- ggplot(disc, aes(energy, valence, color=artist_name, shape=artist_name, label=track_name)) +
   geom_point(alpha=.25) +
   geom_point(data=mean_valence_energy_disc, size=4) +
   geom_vline(xintercept=0.5, linetype="dotted") +
@@ -164,15 +169,15 @@ song_mood_plot <- ggplot(disc, aes(energy, valence, color=artist_name, shape=art
   labs(
     title = "Song mood (entire discogrophy)",
     x = "Energy",
-    y = "Valence",
-    color="Artist Name",
-    shape="Artist Name"
+    y = "Valence"
   )
 
 song_mood_plot + annotate("text", x=.25, y=.25, label="Sad", alpha=.6) +
                  annotate("text", x=.25, y=.75, label="Relaxed", alpha=.6) +
                  annotate("text", x=.75, y=.25, label="Angry", alpha=.6) +
                  annotate("text", x=.75, y=.75, label="Happy", alpha=.6) 
+
+ggplotly(song_mood_plot)
 ``` 
 
 ***
@@ -190,13 +195,15 @@ danceability_valence_energy_albums <- albums %>%
             album_name = album_name,
             score = valence + energy + danceability)
 
-ggplot(danceability_valence_energy_albums, aes(x=album_name, y=score, color=artist_name)) + 
+cohesivenessplot <- ggplot(danceability_valence_energy_albums, aes(x=album_name, y=score, color=artist_name)) + 
     geom_violin() +
     geom_jitter(position=position_jitter(0.15), alpha=0.4) +
     geom_boxplot(alpha=.2, width=.8) +
     ylim(0,3) +
     labs(title = "Album cohesiveness", x="Album name", y="Cohesiveness Score", color="Artist") +
     theme(axis.text.x = element_text(angle=40, hjust=1))
+
+ggplotly(cohesivenessplot)
 ```
 
 ***
