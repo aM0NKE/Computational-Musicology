@@ -16,7 +16,7 @@ library(plotly)
 library(spotifyr)
 library(ggrepel)
 library(flexdashboard)
-# library(compmus)
+library(compmus)
 
 
 # Load entire discography 
@@ -66,9 +66,7 @@ These definitions are quite vague, however, I think that we can make it less amb
 
 Another key difference that sets outsider musicians apart is the amateurish sound of their music. If the definition of an outsider musician is a musician that makes unconventional music by circumstance, then we could consider Beach Boys' Brian Wilson as an outsider musician, as he was, like Daniel Johnson, diagnosed with schizophrenia and bipolar disorder. However, Wilson's music is far more commercially successful than all of the outsider musicians mentioned by Chusid, I think that this is due to the fact that his music doesn't poses an amateurish quality. In summary, his means that the two defining features of outsider music are that it sounds amateuristic, and that it sounds unconventional because of the circumstances the musicians find themselves in. 
 
-My corpus will consist of albums from artists that can be found on the compilation albums of Chusid's Songs in the Key of Z. The goal is to analyze the corpus with metrics provided by Spotify, and determine whether it is possible to categorize these outsider musicians on the basis of these metrics.
-
-I decided to pick these albums mainly because they were created by outsider musicians that were classified as such by the person who introduced the concept of outsider music. However, I chose these particular artists from Chusid's book because I have listened to these albums and I actually find them very enjoyable.  
+My corpus will consist of albums from artists that can be found on the compilation albums of Chusid's Songs in the Key of Z. The goal is to determine whether it is possible to categorize these outsider musicians on the basis of their computational properties. This will be done by analyzing the corpus with the track-based features provided by Spotify, alongside popular Music Information Retrieveal (MIR) techniques..
 
 
 ![B.J. Snowden](images/snowden.jpg){width=20%}
@@ -96,14 +94,19 @@ I decided to pick these albums mainly because they were created by outsider musi
  - Philosophy of the World, by The Shaggs
  - Yip! Jump Music, by Daniel Johnston
  
+I decided to pick these albums mainly because they were created by outsider musicians that were classified as such by the person who introduced the concept of outsider music. However, I chose these particular artists from Chusid's book because I have listened to these albums and I actually find them very enjoyable.  
+ 
 **Strengths and limitations of the corpus:**
+_Strengths:_
 
  - The artists all have a very unique style of making music.
- - All of Wesley Willis' songs have the exact same structure, perhaps this could be valuable, who knows. 
- - Eilart Pilram is a Swedish Elvis impersonator, thus his album is entirely comprised of Elvis covers.
  - All of the albums have been classified as outsider music, without much debate. Except for that one time that B.J. Snowden criticized Chusid because she felt she did not belong on his list of outsiders.
  - Variety in styles might point to some interesting differences between these outsider musicians.
+ 
+_Limitations:_
 
+ - All of Wesley Willis' songs have the exact same structure, perhaps this could be valuable, who knows. 
+ - Eilart Pilram is a Swedish Elvis impersonator, thus his album is entirely comprised of Elvis covers.
 
 **Interesting songs**
 
@@ -146,16 +149,17 @@ song_mood_plot <- ggplot(albums, aes(energy, valence, color=artist_name, shape=a
   labs(
     title = "Song mood (corpus albums)",
     x = "Energy",
-    y = "Valence"
+    y = "Valence",
+    fill = "Artist"
   )
 
-song_mood_plot <-song_mood_plot + 
+song_mood_plot <- song_mood_plot + 
                  annotate("text", x=.25, y=.25, label="Sad", alpha=.6) +
                  annotate("text", x=.25, y=.75, label="Relaxed", alpha=.6) +
                  annotate("text", x=.75, y=.25, label="Angry", alpha=.6) +
                  annotate("text", x=.75, y=.75, label="Happy", alpha=.6) 
 
-song_mood_plot
+song_mood_plot 
 ```
 
 ***
@@ -210,7 +214,7 @@ The next step is to examine if these results are consistent over these artists' 
 
 Interestingly, for all of the artists the mood of their albums (the corpus) are consistent throughout their entire discographies. Thus the corpus is representable for the artists entire music catalog. Another assumption we can make based on this outcome is, that the artists did not experiment a lot when it comes to valence and energy troughout their careers.
   
-### The outsider albums do not sound the same.
+### The outsiders all sound different.
 
 ```{r cohesivenessplot, echo=FALSE, message=FALSE, warning=FALSE}
 danceability_valence_energy_albums <- albums %>% 
@@ -291,6 +295,250 @@ instrumentalplot <- ggplot(albums, aes(x=album_name, y=instrumentalness, color=a
   theme(axis.text.x = element_text(angle=40, hjust=1))
 
 ggplotly(instrumentalplot)
+```
+
+### The Swedish Elvis is pretty similar to his American counterpart
+
+```{r}
+
+# Eilart
+sweden <-
+  get_tidy_audio_analysis("3QqtLDOABCqzKVMd70aGJL") %>%
+  select(segments) %>%
+  unnest(segments) %>%
+  select(start, duration, pitches)
+
+# Elvis
+us <-
+  get_tidy_audio_analysis("452KBpASS5lZLeJWX9Ixub") %>%
+  select(segments) %>%
+  unnest(segments) %>%
+  select(start, duration, pitches)
+
+compmus_long_distance(
+  sweden %>% mutate(pitches = map(pitches, compmus_normalise, "manhattan")),
+  us %>% mutate(pitches = map(pitches, compmus_normalise, "manhattan")),
+  feature = pitches,
+  method = "manhattan"
+) %>%
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_equal() +
+  labs(x = "Eilart Pilram", y = "Elvis Presley") +
+  theme_minimal() +
+  scale_fill_viridis_c(guide = NULL)
+
+```
+
+
+### Daniel Johnston is all over the place. (pt. 1)
+
+```{r}
+beatles <-
+  get_tidy_audio_analysis("58mcXaeR8jDLlzuRElxKek") %>%
+  select(segments) %>%
+  unnest(segments) %>%
+  select(start, duration, pitches)
+
+beatles %>%
+  mutate(pitches = map(pitches, compmus_normalise, "euclidean")) %>%
+  compmus_gather_chroma() %>% 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+```
+
+### Daniel Johnston is all over the place. (pt. 2)
+
+```{r}
+truck <-
+  get_tidy_audio_analysis("10LsjPKWe6KG8PC9G42t69") %>%
+  select(segments) %>%
+  unnest(segments) %>%
+  select(start, duration, pitches)
+
+truck %>%
+  mutate(pitches = map(pitches, compmus_normalise, "euclidean")) %>%
+  compmus_gather_chroma() %>% 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+
+
+```
+
+
+### All Wesley Willis songs are the same. (pt. 1)
+
+```{r, echo = FALSE, message = FALSE}
+
+batman <-
+  get_tidy_audio_analysis("2Od8Vrqg0SAqVTLMHCMmWU") %>%
+  compmus_align(bars, segments) %>%
+  select(bars) %>%
+  unnest(bars) %>%
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "acentre", norm = "manhattan"
+      )
+  ) %>%
+  mutate(
+    timbre =
+      map(segments,
+        compmus_summarise, timbre,
+        method = "mean"
+      )
+  )
+bind_rows(
+  batman %>%
+    compmus_self_similarity(pitches, "aitchison") %>%
+    mutate(d = d / max(d), type = "Chroma"),
+  batman %>%
+    compmus_self_similarity(timbre, "euclidean") %>%
+    mutate(d = d / max(d), type = "Timbre")
+) %>%
+  mutate() %>%
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_fixed() +
+  facet_wrap(~type) +
+  scale_fill_viridis_c(guide = "none") +
+  theme_classic() +
+  labs(x = "", y = "")
+```
+
+### All Wesley Willis songs are the same. (pt. 2)
+
+```{r, echo = FALSE, message = FALSE}
+
+chronic <-
+  get_tidy_audio_analysis("0W463BKzugSbTS6qCl1Vq9") %>%
+  compmus_align(bars, segments) %>%
+  select(bars) %>%
+  unnest(bars) %>%
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "acentre", norm = "manhattan"
+      )
+  ) %>%
+  mutate(
+    timbre =
+      map(segments,
+        compmus_summarise, timbre,
+        method = "mean"
+      )
+  )
+bind_rows(
+  chronic %>%
+    compmus_self_similarity(pitches, "aitchison") %>%
+    mutate(d = d / max(d), type = "Chroma"),
+  chronic %>%
+    compmus_self_similarity(timbre, "euclidean") %>%
+    mutate(d = d / max(d), type = "Timbre")
+) %>%
+  mutate() %>%
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_fixed() +
+  facet_wrap(~type) +
+  scale_fill_viridis_c(guide = "none") +
+  theme_classic() +
+  labs(x = "", y = "")
+```
+
+### All Wesley Willis songs are the same. (pt. 3)
+
+```{r, echo = FALSE, message = FALSE}
+
+fiasco <-
+  get_tidy_audio_analysis("28GmmpvCQxa88rZdEntcYS") %>%
+  compmus_align(bars, segments) %>%
+  select(bars) %>%
+  unnest(bars) %>%
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "acentre", norm = "manhattan"
+      )
+  ) %>%
+  mutate(
+    timbre =
+      map(segments,
+        compmus_summarise, timbre,
+        method = "mean"
+      )
+  )
+bind_rows(
+  fiasco %>%
+    compmus_self_similarity(pitches, "aitchison") %>%
+    mutate(d = d / max(d), type = "Chroma"),
+  fiasco %>%
+    compmus_self_similarity(timbre, "euclidean") %>%
+    mutate(d = d / max(d), type = "Timbre")
+) %>%
+  mutate() %>%
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_fixed() +
+  facet_wrap(~type) +
+  scale_fill_viridis_c(guide = "none") +
+  theme_classic() +
+  labs(x = "", y = "")
 ```
 
 ### Conclusions
