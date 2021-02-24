@@ -7,6 +7,7 @@ output:
     storyboard: true
     social: menu
     source: embed
+    css: style.css
 ---
 
 ```{r setup, include=FALSE}
@@ -58,7 +59,7 @@ songs <- list(snowden_song, eilert_song, willis_song, tim_song, shaggs_song, dan
   reduce(full_join)
 ```
 
-### Outsiders: idiosyncratic and unconnected from conventional art by cicumstance.
+### Outsiders: **idiosyncratic** and **unconnected** from conventional art by cicumstance.
 
 Outsider music is a derivative of <a href="https://www.britannica.com/art/outsider-art">outsider art</a>, which is defined as "any work of art produced by an untrained idiosyncratic artist who is typically unconnected to the conventional art world—not by choice but by circumstance." Its defining feature is "the tendency of the artists to be “straight talking” (even if that talk is straight from a radically different worldview)." In 2000, Irwin Chusid conceptualized the term outsider music in his book: Songs in the Key of Z, in which he explores the field of outsider music by highlighting its most prominent artists. Chusid defines outsider music as "crackpot and visionary music, where all trails lead essentially one place: over the edge." The book was accompanied by two compilation albums that featured a variety of outsider musicians. 
 
@@ -83,7 +84,7 @@ My corpus will consist of albums from artists that can be found on the compilati
 
 
 ***
-![Songs in the Key of Z](images/chusid.jpg){width=100%} 
+![(Songs in the Key of Z)](images/chusid.jpg){width=100%} 
 
 **Corpus:**
 
@@ -121,12 +122,7 @@ I've highlighted these songs for two reasons, (1) because they all possess a chi
 
 
 
-
-
-
-
-
-### Outsiders cannot be generalized trough mood. (pt. 1)
+### Outsiders **cannot be generalized** trough mood. (pt. 1)
 
 ```{r songmoodplot_1}
 mean_valence_energy <- albums %>% 
@@ -174,7 +170,7 @@ These parameters allow us to categorize the mood of each song. Next, if we compu
 
 When we look at the results, we can observe that all albums are relatively close to the center of the plot. This means that we cannot confidently match any album to a certain mood. We can only conclude that Tiny Tim's album is less energetic than all of the other albums, and that Wesley Willis' album is more energetic than the other albums. Another interesting finding is that all of the albums are not overly positive or negative, all of the albums have a similar valence centered around 0.5.
 
-### Outsiders cannot be generalized trough mood. (pt. 2)
+### Outsiders **cannot be generalized** trough mood. (pt. 2)
 
 ```{r songmoodplot_2}
 mean_valence_energy_disc <- disc %>% 
@@ -214,7 +210,7 @@ The next step is to examine if these results are consistent over these artists' 
 
 Interestingly, for all of the artists the mood of their albums (the corpus) are consistent throughout their entire discographies. Thus the corpus is representable for the artists entire music catalog. Another assumption we can make based on this outcome is, that the artists did not experiment a lot when it comes to valence and energy troughout their careers.
   
-### The outsiders all sound different.
+### The outsiders all sound **different**.
 
 ```{r cohesivenessplot, echo=FALSE, message=FALSE, warning=FALSE}
 danceability_valence_energy_albums <- albums %>% 
@@ -297,7 +293,7 @@ instrumentalplot <- ggplot(albums, aes(x=album_name, y=instrumentalness, color=a
 ggplotly(instrumentalplot)
 ```
 
-### The Swedish Elvis is pretty similar to his American counterpart
+### The **Swedish Elvis** is pretty similar to his American counterpart.
 
 ```{r}
 
@@ -339,7 +335,7 @@ compmus_long_distance(
 ```
 
 
-### Daniel Johnston is all over the place. (pt. 1)
+### **Daniel Johnston** is all over the place. (pt. 1)
 
 ```{r}
 beatles <-
@@ -365,7 +361,7 @@ beatles %>%
   scale_fill_viridis_c()
 ```
 
-### Daniel Johnston is all over the place. (pt. 2)
+### **Daniel Johnston** is all over the place. (pt. 2)
 
 ```{r}
 truck <-
@@ -394,7 +390,7 @@ truck %>%
 ```
 
 
-### All Wesley Willis songs are the same. (pt. 1)
+### All **Wesley Willis** songs are the same. (pt. 1)
 
 ```{r, echo = FALSE, message = FALSE}
 
@@ -443,7 +439,7 @@ bind_rows(
   labs(x = "", y = "")
 ```
 
-### All Wesley Willis songs are the same. (pt. 2)
+### All **Wesley Willis** songs are the same. (pt. 2)
 
 ```{r, echo = FALSE, message = FALSE}
 
@@ -492,7 +488,7 @@ bind_rows(
   labs(x = "", y = "")
 ```
 
-### All Wesley Willis songs are the same. (pt. 3)
+### All **Wesley Willis** songs are the same. (pt. 3)
 
 ```{r, echo = FALSE, message = FALSE}
 
@@ -541,4 +537,4 @@ bind_rows(
   labs(x = "", y = "")
 ```
 
-### Conclusions
+### All outdider musicians are **unique**, this means that the genre outsider music **cannot be generalized** trough their track features. 

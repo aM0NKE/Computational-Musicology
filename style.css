@@ -1,0 +1,43 @@
+/* Custom changes */
+
+/* Navigation bar*/
+.navbar-inverse {
+	background-color: #c9043c;
+	border-color: #000000
+}
+
+.navbar-form {
+    border-color: #1a6ecc;
+}
+
+a:link {
+    color: #1a6ecc;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #9fc4ed;
+    text-decoration: underline;
+}
+
+/*Story board colours*/ 
+.storyboard-nav .sbframelist ul li.active {
+    background-color: #f7bccd;
+}
+
+.storyboard-nav .sbframelist ul li.active {
+    color: #173109;
+}
+
+
+
+/*Gauge*/
+
+
+.html-widget.gauge svg {
+  height: 150px;
+  width: 300px;
+  margin-top: -10px;
+  margin-bottom: -40px;
+}
+
