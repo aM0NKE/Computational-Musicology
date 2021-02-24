@@ -3,9 +3,10 @@ title: "Computational Musicology Portfolio"
 author: "River Vaudrin"
 date: "22 February 2021"
 output: 
-    flexdashboard::flex_dashboard:
-        storyboard: true
-        theme: flatly
+  flexdashboard::flex_dashboard:
+    storyboard: true
+    social: menu
+    source: embed
 ---
 
 ```{r setup, include=FALSE}
@@ -69,16 +70,33 @@ My corpus will consist of albums from artists that can be found on the compilati
 
 I decided to pick these albums mainly because they were created by outsider musicians that were classified as such by the person who introduced the concept of outsider music. However, I chose these particular artists from Chusid's book because I have listened to these albums and I actually find them very enjoyable.  
 
+
+![B.J. Snowden](images/snowden.jpg){width=20%}
+![Eilart Pilram](images/eilart.jpg){width=20%}
+![Wesley Willis](images/wesley.jpg){width=20%}
+
+(From left-to-right: B.J. Snowden, Eilart Pilram, Wesley Willis)
+
+![Tiny Tim](images/tiny.jpg){width=20%}
+![The Shaggs](images/shaggs.jpg){width=20%}
+![Daniel Johnston](images/daniel.jpg){width=20%}
+
+(From left-to-right: Tiny Tim, The Shaggs, Daniel Johnson)
+
+
 ***
+![Songs in the Key of Z](images/chusid.jpg){width=100%} 
+
 **Corpus:**
- -  Life In the USA and Canada, by B.J. Snowden
- -  Eilart Is Back, by Eilert Pilram
- -  Rush Hour, Wesley Willis
- -  God Bless Tiny Tim, by Tiny Tim
- -  Philosophy of the World, by The Shaggs
- -  Yip! Jump Music, by Daniel Johnston
+
+ - Life In the USA and Canada, by B.J. Snowden
+ - Eilart Is Back, by Eilert Pilram
+ - Rush Hour, Wesley Willis
+ - God Bless Tiny Tim, by Tiny Tim
+ - Philosophy of the World, by The Shaggs
+ - Yip! Jump Music, by Daniel Johnston
  
-Strengths and limitations of the corpus:
+**Strengths and limitations of the corpus:**
 
  - The artists all have a very unique style of making music.
  - All of Wesley Willis' songs have the exact same structure, perhaps this could be valuable, who knows. 
@@ -86,17 +104,22 @@ Strengths and limitations of the corpus:
  - All of the albums have been classified as outsider music, without much debate. Except for that one time that B.J. Snowden criticized Chusid because she felt she did not belong on his list of outsiders.
  - Variety in styles might point to some interesting differences between these outsider musicians.
 
-*** 
 
 **Interesting songs**
-- In Canada, by B.J Snowden
-- Suspicious Minds, by Eilert Pilram
-- I Wipped Batman's Ass, by Wesley Willis
-- Livin' In the Sunlight, Lovin' In the Moon Light, by Tiny Tim
-- Who Are Parents?, by The Shaggs 
-- The Beatles, by Daniel Johnston
+
+ - In Canada, by B.J Snowden
+ - Suspicious Minds, by Eilert Pilram
+ - I Wipped Batman's Ass, by Wesley Willis
+ - Livin' In the Sunlight, Lovin' In the Moon Light, by Tiny Tim
+ - Who Are Parents?, by The Shaggs 
+ - The Beatles, by Daniel Johnston
 
 I've highlighted these songs for two reasons, (1) because they all possess a childlike quality, a feature that is often mentioned as a characteristic of outsider music; (2) and because I wanted to examine at least one song of every artist in the corpus in more detail. It will be interesting to see if the childlike quality would in some way be reflected in the metrics, valence and energy could show to be fruitful, as optimism, energy and positivity are common traits of childlike music. It might not be enough to confidently categorize outsider music, but it could be a starting point.
+
+
+
+
+
 
 
 
@@ -112,7 +135,7 @@ mean_valence_energy <- albums %>%
             energy  = mean(energy))
 
 
-song_mood_plot <- ggplot(albums, aes(energy, valence, color=artist_name, shape=album_name, label=track_name)) +
+song_mood_plot <- ggplot(albums, aes(energy, valence, color=artist_name, shape=artist_name, label=track_name)) +
   geom_point(alpha=.45) +
   geom_point(data=mean_valence_energy, size=4) +
   geom_vline(xintercept=0.5, linetype="dotted") +
@@ -132,7 +155,7 @@ song_mood_plot <-song_mood_plot +
                  annotate("text", x=.75, y=.25, label="Angry", alpha=.6) +
                  annotate("text", x=.75, y=.75, label="Happy", alpha=.6) 
 
-ggplotly(song_mood_plot)
+song_mood_plot
 ```
 
 ***
@@ -147,7 +170,7 @@ These parameters allow us to categorize the mood of each song. Next, if we compu
 
 When we look at the results, we can observe that all albums are relatively close to the center of the plot. This means that we cannot confidently match any album to a certain mood. We can only conclude that Tiny Tim's album is less energetic than all of the other albums, and that Wesley Willis' album is more energetic than the other albums. Another interesting finding is that all of the albums are not overly positive or negative, all of the albums have a similar valence centered around 0.5.
 
-### (pt. 2)
+### Outsiders cannot be generalized trough mood. (pt. 2)
 
 ```{r songmoodplot_2}
 mean_valence_energy_disc <- disc %>% 
@@ -178,7 +201,7 @@ song_mood_plot <- song_mood_plot +
                  annotate("text", x=.75, y=.25, label="Angry", alpha=.6) +
                  annotate("text", x=.75, y=.75, label="Happy", alpha=.6) 
 
-ggplotly(song_mood_plot)
+song_mood_plot
 ``` 
 
 ***
@@ -187,7 +210,7 @@ The next step is to examine if these results are consistent over these artists' 
 
 Interestingly, for all of the artists the mood of their albums (the corpus) are consistent throughout their entire discographies. Thus the corpus is representable for the artists entire music catalog. Another assumption we can make based on this outcome is, that the artists did not experiment a lot when it comes to valence and energy troughout their careers.
   
-### The outsider albums do not sound the same
+### The outsider albums do not sound the same.
 
 ```{r cohesivenessplot, echo=FALSE, message=FALSE, warning=FALSE}
 danceability_valence_energy_albums <- albums %>% 
@@ -197,10 +220,16 @@ danceability_valence_energy_albums <- albums %>%
             track_name = track_name,
             score = valence + energy + danceability)
 
+mean_std <- danceability_valence_energy_albums %>%
+  group_by(album_name) %>%
+  summarise(m = mean(score),
+            s = sd(score)
+  )
+
 cohesivenessplot <- ggplot(danceability_valence_energy_albums, aes(x=album_name, y=score, color=artist_name, label=track_name)) + 
     geom_violin(alpha=.4) +
     geom_jitter(position=position_jitter(0.15), alpha=0.4) +
-    geom_boxplot(alpha=.2, width=.2) +
+    #geom_boxplot(alpha=.2, width=.2) +
     ylim(0,3) +
     labs(title = "Album cohesiveness", x="Album name", y="Cohesiveness Score", color="Artist") +
     theme(axis.text.x = element_text(angle=40, hjust=1))
@@ -223,7 +252,7 @@ I designed the cohesiveness score with these parameters because, they were descr
 From these results we can observe a couple of findings. First, we can see that Wesley Willis's album is the most cohesive, meaning that all of his songs have a similar cohesiveness score. This is no surprise when we take into account that all of his songs have the exact same song structure, alongside the fact that all of his songs have a similar sound, something I am going to examine further in the coming weeks. Another finding is that Eilart Is Back, Godbless Tiny Tim and Yip Jump Music all have a high variance in cohesiveness score, meaning that they have a wide variety in songs (in the case of Eilart Pilarm's album this is not so strange, as it is essentially an Elvis compilation album). This is contrasted by Life In the USA and Canada and Philosophy of the World, which are albums that consist of songs that are more similar to eachother. 
 
 
-### Some tracks aren't regular (pt. 1)
+### Some tracks aren't regular. (pt. 1)
 
 ```{r spokenwordsplot, echo=FALSE, message=FALSE, warning=FALSE}
 spokenwordplot <- ggplot(albums, aes(x=album_name, y=speechiness, color=artist_name, label=track_name)) +
@@ -249,7 +278,7 @@ To summarize, I want to see which songs are spoken word songs and which are inst
 
 Now that I have determined the spoken word and instrumental tracks, I could decide to exclude these out of the dataframe to compare the songs that have the most similar properties. This could lead to better comparisons that we can use to either determine what makes these musicians outsiders, or what the differences are between these outsider musicians.   
 
-### (pt. 2)
+### Some tracks aren't regular. (pt. 2)
 
 ```{r instrumentalplot, echo=FALSE, message=FALSE, warning=FALSE}
 instrumentalplot <- ggplot(albums, aes(x=album_name, y=instrumentalness, color=artist_name, label=track_name)) +
@@ -263,3 +292,5 @@ instrumentalplot <- ggplot(albums, aes(x=album_name, y=instrumentalness, color=a
 
 ggplotly(instrumentalplot)
 ```
+
+### Conclusions
