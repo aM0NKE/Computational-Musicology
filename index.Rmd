@@ -59,7 +59,7 @@ songs <- list(snowden_song, eilert_song, willis_song, tim_song, shaggs_song, dan
   reduce(full_join)
 ```
 
-### Outsiders: **idiosyncratic** and **unconnected** from conventional art by cicumstance.
+### Outsiders: **idiosyncratic** and **unconnected** from conventional art **by cicumstance**.
 
 Outsider music is a derivative of <a href="https://www.britannica.com/art/outsider-art">outsider art</a>, which is defined as "any work of art produced by an untrained idiosyncratic artist who is typically unconnected to the conventional art world—not by choice but by circumstance." Its defining feature is "the tendency of the artists to be “straight talking” (even if that talk is straight from a radically different worldview)." In 2000, Irwin Chusid conceptualized the term outsider music in his book: Songs in the Key of Z, in which he explores the field of outsider music by highlighting its most prominent artists. Chusid defines outsider music as "crackpot and visionary music, where all trails lead essentially one place: over the edge." The book was accompanied by two compilation albums that featured a variety of outsider musicians. 
 
@@ -312,10 +312,10 @@ us <-
   select(start, duration, pitches)
 
 compmus_long_distance(
-  sweden %>% mutate(pitches = map(pitches, compmus_normalise, "manhattan")),
-  us %>% mutate(pitches = map(pitches, compmus_normalise, "manhattan")),
+  sweden %>% mutate(pitches = map(pitches, compmus_normalise, "euclidean")),
+  us %>% mutate(pitches = map(pitches, compmus_normalise, "euclidean")),
   feature = pitches,
-  method = "manhattan"
+  method = "angular"
 ) %>%
   ggplot(
     aes(
@@ -328,7 +328,7 @@ compmus_long_distance(
   ) +
   geom_tile() +
   coord_equal() +
-  labs(x = "Eilart Pilram", y = "Elvis Presley") +
+  labs(title="Dynamic Time Warping: Jailhouse Rock",x = "Eilart Pilram", y = "Elvis Presley") +
   theme_minimal() +
   scale_fill_viridis_c(guide = NULL)
 
@@ -339,13 +339,13 @@ compmus_long_distance(
 
 ```{r}
 beatles <-
-  get_tidy_audio_analysis("58mcXaeR8jDLlzuRElxKek") %>%
+  get_tidy_audio_analysis("68EnKIN8yb1Rh0EmsTZgRr") %>%
   select(segments) %>%
   unnest(segments) %>%
   select(start, duration, pitches)
 
 beatles %>%
-  mutate(pitches = map(pitches, compmus_normalise, "euclidean")) %>%
+  mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
   compmus_gather_chroma() %>% 
   ggplot(
     aes(
@@ -356,22 +356,24 @@ beatles %>%
     )
   ) +
   geom_tile() +
-  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  labs(title="Chromagram: The Beatles, Daniel Johnson", x = "Time (s)", y = NULL, fill = "Magnitude") +
   theme_minimal() +
   scale_fill_viridis_c()
 ```
 
+
+
 ### **Daniel Johnston** is all over the place. (pt. 2)
 
 ```{r}
-truck <-
-  get_tidy_audio_analysis("10LsjPKWe6KG8PC9G42t69") %>%
+kong <-
+  get_tidy_audio_analysis("2QQovIO9Vblm1Ka9IWcTDV") %>%
   select(segments) %>%
   unnest(segments) %>%
   select(start, duration, pitches)
 
-truck %>%
-  mutate(pitches = map(pitches, compmus_normalise, "euclidean")) %>%
+kong %>%
+  mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
   compmus_gather_chroma() %>% 
   ggplot(
     aes(
@@ -382,7 +384,89 @@ truck %>%
     )
   ) +
   geom_tile() +
-  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  labs(title="Chromagram: King Kong, Daniel Johnson", x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+
+
+```
+
+### **Daniel Johnston** is all over the place. (pt. 3)
+
+```{r}
+columbo <-
+  get_tidy_audio_analysis("56CyJWZRpiOP4XyWpEsWUA") %>%
+  select(segments) %>%
+  unnest(segments) %>%
+  select(start, duration, pitches)
+
+columbo %>%
+  mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
+  compmus_gather_chroma() %>% 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(title="Chromagram: Who Killed John Columbo, Wesley Willis", x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+
+
+```
+
+### **Daniel Johnston** is all over the place. (pt. 4)
+
+```{r}
+tiptoe <-
+  get_tidy_audio_analysis("3lJNL14w4Uwcs1hexQZSQf") %>%
+  select(segments) %>%
+  unnest(segments) %>%
+  select(start, duration, pitches)
+
+tiptoe %>%
+  mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
+  compmus_gather_chroma() %>% 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(title="Chromagram: Living Is Easy, B.J. Snowden", x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+```
+
+### **Daniel Johnston** is all over the place. (pt. 5)
+
+```{r}
+halloween <-
+  get_tidy_audio_analysis("54qgVl1i7Lpj5DuWbOd4Hi") %>%
+  select(segments) %>%
+  unnest(segments) %>%
+  select(start, duration, pitches)
+
+halloween %>%
+  mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
+  compmus_gather_chroma() %>% 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(title="Chromagram: It's Halloween, The Shaggs", x = "Time (s)", y = NULL, fill = "Magnitude") +
   theme_minimal() +
   scale_fill_viridis_c()
 
