@@ -18,6 +18,7 @@ library(spotifyr)
 library(ggrepel)
 library(flexdashboard)
 library(compmus)
+library(fmsb)
 
 
 # Load entire discography 
@@ -293,7 +294,7 @@ instrumentalplot <- ggplot(albums, aes(x=album_name, y=instrumentalness, color=a
 ggplotly(instrumentalplot)
 ```
 
-### The **Swedish Elvis** is pretty similar to his American counterpart.
+### The **Swedish Elvis** is pretty similar to his American counterpart. (pt. 1)
 
 ```{r}
 
@@ -312,8 +313,8 @@ us <-
   select(start, duration, pitches)
 
 compmus_long_distance(
-  sweden %>% mutate(pitches = map(pitches, compmus_normalise, "euclidean")),
-  us %>% mutate(pitches = map(pitches, compmus_normalise, "euclidean")),
+  sweden %>% mutate(pitches = map(pitches, compmus_normalise, "manhattan")),
+  us %>% mutate(pitches = map(pitches, compmus_normalise, "manhattan")),
   feature = pitches,
   method = "angular"
 ) %>%
@@ -334,6 +335,59 @@ compmus_long_distance(
 
 ```
 
+### The **Swedish Elvis** is pretty similar to his American counterpart.
+```{r}
+eilart_song <- subset(eilert_album, track_name=="Jailhouse Rock - 1998")
+elvis_song <- get_track_audio_features("1w94wmfyOvNNhtZw7bv0gP", authorization = get_spotify_access_token())
+
+jailhouse <- list(eilart_song, elvis_song) %>%
+  reduce(full_join) %>%
+  summarise(track_name,
+            artist_name,
+            valence=valence,
+            energy=energy,
+            danceability,
+            loudness,
+            speechiness,
+            acousticness,
+            instrumentalness,
+            tempo,
+            liveness)
+
+#eilert_data <- eilart_song[c("danceability", "valence", "speechiness", "acousticness", "instrumentalness", "liveness")]
+#radarchart(eilert_data)
+
+# Demo data
+exam_scores <- data.frame(
+    row.names = c("Student.1", "Student.2", "Student.3"),
+      Biology = c(7.9, 3.9, 9.4),
+      Physics = c(10, 20, 0),
+        Maths = c(3.7, 11.5, 2.5),
+        Sport = c(8.7, 20, 4),
+      English = c(7.9, 7.2, 12.4),
+    Geography = c(6.4, 10.5, 6.5),
+          Art = c(2.4, 0.2, 9.8),
+  Programming = c(0, 0, 20),
+        Music = c(20, 20, 20)
+)
+exam_scores
+
+# Define the variable ranges: maximum and minimum
+max_min <- data.frame(
+  Biology = c(20, 0), Physics = c(20, 0), Maths = c(20, 0),
+  Sport = c(20, 0), English = c(20, 0), Geography = c(20, 0),
+  Art = c(20, 0), Programming = c(20, 0), Music = c(20, 0)
+)
+rownames(max_min) <- c("Max", "Min")
+
+# Bind the variable ranges to the data
+df <- rbind(max_min, exam_scores)
+df
+
+student1_data <- df[c("Max", "Min", "Student.1"), ]
+radarchart(student1_data)
+
+```
 
 ### **Daniel Johnston** is all over the place. (pt. 1)
 
