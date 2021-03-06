@@ -1,5 +1,5 @@
 ---
-title: "Computational Musicology Portfolio"
+title: "The Essence of Outsider Music"
 author: "River Vaudrin"
 date: "8 March 2021"
 output: 
@@ -454,7 +454,7 @@ shoes <- shoes %>%
 
 ***
 
-A common feature of Daniel Johnson's music is that his songs typically do not have a dominant pitch
+A common feature of Daniel Johnson's music is that his songs typically do not have a dominant pitch, this becomes clear when we look at some chromagrams. A chromagram is a plot of a song showing the pitch registered at every second. When a pitch is registered a yellow bar is plotted in the corresponding pitch class, its brightness is determined by the magnitude. When we look at these two chromagrams of _Sorry Entertainer_ and _Worried Shoes_, we can see that both tracks do not have a dominant pitch. The former has a heavy emphasis on the A and G#|Ab pitch and the latter on the B and F#|Gb. 
 
 ### **Daniel Johnston** is all over the place. (pt. 2)
 
@@ -565,7 +565,8 @@ dad <- dad %>%
 
 ***
 
-When we compare Daniel Johnson's chromagrams to some of his outsider peers, his unique quality becomes even more evident. 
+When we compare Daniel Johnson's chromagrams to some of his outsider peers', his unique quality becomes even more evident. When we look at these particular songs of B.J. Snowden, The Shaggs, and Tiny Tim, we can see that these all have a dominant pitch, which is G. Wesley Willis' _Who Killed John Columbo_ has a dominant pitch of A. 
+Daniel Johnson had the highest variance in cohesiveness score, his chromagrams give us a 
 
 
 ### All **Wesley Willis** songs are the same. (pt. 1)
