@@ -136,7 +136,8 @@ song_mood_plot <- ggplot(albums, aes(energy, valence, color=artist_name, shape=a
     title = "Song mood (corpus albums)",
     x = "Energy",
     y = "Valence",
-    fill = "Artist"
+    color = "Artist",
+    shape = "Artist"
   )
 
 song_mood_plot <- song_mood_plot + 
@@ -144,7 +145,10 @@ song_mood_plot <- song_mood_plot +
                  annotate("text", x=.25, y=.75, label="Relaxed", alpha=.6) +
                  annotate("text", x=.75, y=.25, label="Angry", alpha=.6) +
                  annotate("text", x=.75, y=.75, label="Happy", alpha=.6) 
+```
 
+
+```{r}
 mean_valence_energy_disc <- disc %>% 
   group_by(artist_name) %>% 
   summarise(artist_name = artist_name,
@@ -164,10 +168,12 @@ song_mood_plot_disc <- ggplot(disc, aes(energy, valence, color=artist_name, shap
   labs(
     title = "Song mood (entire discogrophy)",
     x = "Energy",
-    y = "Valence"
+    y = "Valence",
+    color = "Artist",
+    shape = "Artist"
   )
 
-song_mood_plot_disc <- song_mood_plot + 
+song_mood_plot_disc <- song_mood_plot_disc + 
                  annotate("text", x=.25, y=.25, label="Sad", alpha=.6) +
                  annotate("text", x=.25, y=.75, label="Relaxed", alpha=.6) +
                  annotate("text", x=.75, y=.25, label="Angry", alpha=.6) +
@@ -179,7 +185,7 @@ song_mood_plot_disc <- song_mood_plot +
 
 ***
 
-To examine if outsiders can be catgorized by mood, I plotted the mean valence and energy of each album to determine the albums mood (relaxed, happy, angry or sad). Spotify defines these paramaters as follows:
+To examine if outsiders can be categorized by mood, I plotted the mean valence and energy of each album to determine the albums mood (relaxed, happy, angry or sad). Spotify defines these parameters as follows:
 
 - Valence: A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).
 
@@ -252,7 +258,7 @@ Next I wanted to determine what songs are outliers. When we look at speechiness,
 
 - Speechiness: detects the presence of spoken words in a track. The more exclusively speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value. Values above 0.66 describe tracks that are probably made entirely of spoken words. Values between 0.33 and 0.66 describe tracks that may contain both music and speech, either in sections or layered, including such cases as rap music. Values below 0.33 most likely represent music and other non-speech-like tracks.
 
-We can see that only three songs in the entire corpus are spoken word songs according to Spotify. 
+We can see that only three songs in the entire corpus are spoken word songs according to Spotify. Eilart Pilram, B.J. Snowden, The Shaggs, and Wesley Willis all refrained from making spoken word tracks.
 
 ### Some tracks aren't regular. (pt. 2)
 
@@ -318,8 +324,12 @@ compmus_long_distance(
   scale_fill_viridis_c(guide = NULL)
 
 ```
+
 ***
-Dynamic Time Warping is a technique in MIR used to compare pitches of two versions of a song into one single visualisation. If the two versions are similar a diagonal line should become visible.  
+
+Dynamic Time Warping is a technique in MIR used to compare pitches of two versions of a song into one single visualisation. If the two versions are similar a diagonal line should become visible. Here we can see two renditions of _Silent Night_, this song was chosen in particular because it is the only song that has two versions with the exact same runtime. Most of Eilert's versions are a bit shorter. Why you ask? perhaps I will explore this furter in the future. 
+
+Anyhow, in the plot we can vaguely see a diagonal line, however, it is not 100% clear. If it was, that would mean that the songs are on the same pitch for every second of the track. In the case of _Silent Night_ this is not the case, but the fact that a diagnoal line is visible indicates that there is quite an *overlap in pitch between* the two versions. 
 
 
 ### The **Swedish Elvis** is pretty similar to his American counterpart. (pt. 2)
@@ -351,9 +361,6 @@ mean_eilert <- eilert_playlist %>%
             speechiness = mean(speechiness)
             )
 
-
-
-
 radar_data <- list(mean_elvis, mean_eilert) %>%
   reduce(full_join)
 
@@ -364,13 +371,13 @@ fig <- plot_ly(
 fig <- fig %>%
   add_trace(
     r = c(0.4376000, 0.4334933, 0.05243333, 0.7043733, 0.025044287, 0.1772533, 0.5453333),
-    theta = c("mean_danceability", "mean_energy", "mean_speechiness", "mean_acousticness","mean_instrumentalness", "mean_liveness", "mean_valence"),
+    theta = c("Mean Danceability", "Mean Energy", "Mean Speechiness", "Mean Acousticness","Mean Instrumentalness", "Mean Liveness", "Mean Valence"),
     name = 'Elvis Presley'
   ) 
 fig <- fig %>%
   add_trace(
     r = c(0.4501333, 0.4996000, 0.03138667, 0.4706067, 0.003415193, 0.1932133, 0.4265333),
-    theta = c("mean_danceability", "mean_energy", "mean_speechiness", "mean_acousticness","mean_instrumentalness", "mean_liveness", "mean_valence"),
+    theta = c("Mean Danceability", "Mean Energy", "Mean Speechiness", "Mean Acousticness","Mean Instrumentalness", "Mean Liveness", "Mean Valence"),
     name = 'Eilert Pilram'
   ) 
 
@@ -382,25 +389,26 @@ fig <- fig %>%
         range = c(0,1)
       )
     )
-  )
+  ) 
 
 fig
 ```
 
 ***
-The radar plot shows the mean of every numeric Spotify parameter for _Eilert Is Back_ and a playlist comprised of Elvis songs that is identical to the tracklist of _Eilert Is Back_. The results show that there is **very little difference between Eilert and Elvis** their renditions. The only notable differences are that Eilert's versions are overall a bit more energetic annd less positive. 
+
+The radar plot shows the mean of every numeric Spotify parameter for _Eilert Is Back_ and a playlist comprised of Elvis songs that is identical to the tracklist of _Eilert Is Back_. The results show that there is **very little difference between Eilert and Elvis** their renditions. The only notable differences are that Eilert's versions are overall a bit more energetic and less positive. 
 
 
 ### **Daniel Johnston** is all over the place. (pt. 1)
 
 ```{r}
-beatles <-
-  get_tidy_audio_analysis("68EnKIN8yb1Rh0EmsTZgRr") %>%
+enter <-
+  get_tidy_audio_analysis("4AiCNRPVLZcqxfKuIlAqKn") %>%
   select(segments) %>%
   unnest(segments) %>%
   select(start, duration, pitches)
 
-beatles %>%
+enter <- enter %>%
   mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
   compmus_gather_chroma() %>% 
   ggplot(
@@ -412,23 +420,19 @@ beatles %>%
     )
   ) +
   geom_tile() +
-  labs(title="Chromagram: The Beatles, Daniel Johnson", x = "Time (s)", y = NULL, fill = "Magnitude") +
+  labs(title="Chromagram: Sorry Entertainer, Daniel Johnson", x = "Time (s)", y = NULL, fill = "Magnitude") +
   theme_minimal() +
   scale_fill_viridis_c()
 ```
-
-
-
-### **Daniel Johnston** is all over the place. (pt. 2)
 
 ```{r}
-kong <-
-  get_tidy_audio_analysis("2QQovIO9Vblm1Ka9IWcTDV") %>%
+shoes <-
+  get_tidy_audio_analysis("6Er74mDxRRp1sTbOhC1jD0") %>%
   select(segments) %>%
   unnest(segments) %>%
   select(start, duration, pitches)
 
-kong %>%
+shoes <- shoes %>%
   mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
   compmus_gather_chroma() %>% 
   ggplot(
@@ -440,14 +444,19 @@ kong %>%
     )
   ) +
   geom_tile() +
-  labs(title="Chromagram: King Kong, Daniel Johnson", x = "Time (s)", y = NULL, fill = "Magnitude") +
+  labs(title="Chromagram: Worried Shoes, Daniel Johnson", x = "Time (s)", y = NULL, fill = "Magnitude") +
   theme_minimal() +
   scale_fill_viridis_c()
 
-
 ```
 
-### **Daniel Johnston** is all over the place. (pt. 3)
+![](images/daniel12.jpg){width=100%}
+
+***
+
+A common feature of Daniel Johnson's music is that his songs typically do not have a dominant pitch
+
+### **Daniel Johnston** is all over the place. (pt. 2)
 
 ```{r}
 columbo <-
@@ -456,7 +465,7 @@ columbo <-
   unnest(segments) %>%
   select(start, duration, pitches)
 
-columbo %>%
+columbo <- columbo %>%
   mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
   compmus_gather_chroma() %>% 
   ggplot(
@@ -475,16 +484,14 @@ columbo %>%
 
 ```
 
-### **Daniel Johnston** is all over the place. (pt. 4)
-
 ```{r}
-tiptoe <-
+easy <-
   get_tidy_audio_analysis("3lJNL14w4Uwcs1hexQZSQf") %>%
   select(segments) %>%
   unnest(segments) %>%
   select(start, duration, pitches)
 
-tiptoe %>%
+easy <- easy %>%
   mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
   compmus_gather_chroma() %>% 
   ggplot(
@@ -501,7 +508,6 @@ tiptoe %>%
   scale_fill_viridis_c()
 ```
 
-### **Daniel Johnston** is all over the place. (pt. 5)
 
 ```{r}
 halloween <-
@@ -510,7 +516,7 @@ halloween <-
   unnest(segments) %>%
   select(start, duration, pitches)
 
-halloween %>%
+halloween <- halloween %>%
   mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
   compmus_gather_chroma() %>% 
   ggplot(
@@ -528,6 +534,38 @@ halloween %>%
 
 
 ```
+
+```{r}
+dad <-
+  get_tidy_audio_analysis("79yudXe8vrL3vhbfnArJ9D") %>%
+  select(segments) %>%
+  unnest(segments) %>%
+  select(start, duration, pitches)
+
+dad <- dad %>%
+  mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
+  compmus_gather_chroma() %>% 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(title="Chromagram: Daddy, Daddy What Is Heaven Like, Tiny Tim", x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+
+
+```
+
+![](images/daniel3456.jpg){width=100%}
+
+***
+
+When we compare Daniel Johnson's chromagrams to some of his outsider peers, his unique quality becomes even more evident. 
 
 
 ### All **Wesley Willis** songs are the same. (pt. 1)
