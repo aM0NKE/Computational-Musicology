@@ -1,7 +1,7 @@
 ---
 title: "The Essence of Outsider Music"
 author: "River Vaudrin"
-date: "8 March 2021"
+date: "15 March 2021"
 output: 
   flexdashboard::flex_dashboard:
     storyboard: true
@@ -114,7 +114,7 @@ I've highlighted these songs for two reasons, (1) because they all possess a chi
 ### Outsiders **cannot be generalized** trough mood.
 
 
-```{r songmoodplot_1}
+```{r eval=FALSE, include=FALSE}
 mean_valence_energy <- albums %>% 
   group_by(album_name) %>% 
   summarise(artist_name = artist_name,
@@ -148,7 +148,7 @@ song_mood_plot <- song_mood_plot +
 ```
 
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 mean_valence_energy_disc <- disc %>% 
   group_by(artist_name) %>% 
   summarise(artist_name = artist_name,
@@ -319,7 +319,7 @@ compmus_long_distance(
   ) +
   geom_tile() +
   coord_equal() +
-  labs(title="Dynamic Time Warping: Silent Night",x = "Eilert Pilram", y = "Elvis Presley") +
+  labs(title="Silent Night",x = "Eilert Pilram", y = "Elvis Presley") +
   theme_minimal() +
   scale_fill_viridis_c(guide = NULL)
 
@@ -327,9 +327,9 @@ compmus_long_distance(
 
 ***
 
-Dynamic Time Warping is a technique in MIR used to compare pitches of two versions of a song into one single visualisation. If the two versions are similar a diagonal line should become visible. Here we can see two renditions of _Silent Night_, this song was chosen in particular because it is the only song that has two versions with the exact same runtime. Most of Eilert's versions are a bit shorter. Why you ask? perhaps I will explore this furter in the future. 
+Dynamic Time Warping is a technique in MIR used to compare pitches of two versions of a song into one single visualization. If the two versions are similar a diagonal line should become visible. Here we can see two renditions of _Silent Night_, this song was chosen in particular because it is the only song that has two versions with the exact same runtime. Most of Eilert's versions are a bit shorter. Why you ask? perhaps I will explore this furter in the future. 
 
-Anyhow, in the plot we can vaguely see a diagonal line, however, it is not 100% clear. If it was, that would mean that the songs are on the same pitch for every second of the track. In the case of _Silent Night_ this is not the case, but the fact that a diagnoal line is visible indicates that there is quite an *overlap in pitch between* the two versions. 
+Anyhow, in the plot we can vaguely see a diagonal line, however, it is not 100% clear. If it was, that would mean that the songs are on the same pitch for every second of the track. In the case of _Silent Night_ this is not the case, but the fact that a diagonal line is visible indicates that there is quite an **overlap in pitch between the two versions**. 
 
 
 ### The **Swedish Elvis** is pretty similar to his American counterpart. (pt. 2)
@@ -445,7 +445,7 @@ outsiders %>%
 When we look at Spotify's Timbre coefficients for both Eilert and Elvis, we can observe two things. The first is that the mean of all of the coefficients is relatively similar for both artists. Second is that the variance, for the c02, c03, c04 and c05 is higher for Elvis.
 
 
-### The Shaggs a band of three, each playing a different song (pt.1)
+### **The Shaggs** a band of three, each playing a different song (pt.1)
 
 ```{r eval=FALSE, include=FALSE}
 circshift <- function(v, n) {
@@ -656,18 +656,18 @@ happy <- happy %>%
 
 ***
 
-The Shaggs have been described as a band consisting of three members, each playing a totally different song. An important factor is their drummer who plays a constant pattern throughout the entire track. Often the track opens and closes with the only the drummer playing, this is clearly visible in the keygrams of _Philosophy of the World_, _My Pal Foot Foot_, _Why Do I Feel?_ and _I'm so Happy When You're Near_. I the keygrams we can see that there usually is an activation of all keys in the beginning and end, this indicates that there is no single key observable. What the keygram does observe is the percussion, which is key-less, hence it spans over all the keys. 
+The Shaggs have been described as a band consisting of three members, each playing a totally different song. An important factor is their drummer who plays a constant pattern throughout the entire track. **Often the track opens and closes with the only the drummer playing**, this is clearly visible in the keygrams of _Philosophy of the World_, _My Pal Foot Foot_, _Why Do I Feel?_ and _I'm so Happy When You're Near_. I the keygrams we can see that there usually is an activation of all keys in the beginning and end, this indicates that there is no single key observable. What the keygram does observe is the percussion, which is key-less, hence it spans over all the keys. 
 
-### The Shaggs a band of three, each playing a different song (pt.2)
+### **The Shaggs** a band of three, each playing a different song (pt.2)
 ```{r eval=FALSE, include=FALSE}
 world <- get_tidy_audio_analysis("2WhRJwrsy57H5Mm1P3lykJ")
 
-word <- world %>%
+world %>%
   tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) %>%
   ggplot(aes(x = time, y = bpm, fill = power)) +
   geom_raster() +
   scale_fill_viridis_c(guide = "none") +
-  labs(title="Philophy of the World", x = "Time (s)", y = "Tempo (BPM)") +
+  labs(title="Philosophy of the World", x = "Time (s)", y = "Tempo (BPM)") +
   theme_classic()
 
 ```
@@ -675,12 +675,12 @@ word <- world %>%
 ```{r eval=FALSE, include=FALSE}
 car <- get_tidy_audio_analysis("3lJZ5C1zbgUeYl8szngWJb")
 
-car <- car %>%
+car %>%
   tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) %>%
   ggplot(aes(x = time, y = bpm, fill = power)) +
   geom_raster() +
   scale_fill_viridis_c(guide = "none") +
-  labs(title="That Little Sports Car", x = "Time (s)", y = "Tempo (BPM)") +
+  labs(title="That Little Sports Car", x = "Time (s)", y = "Tempo (BPM)") + 
   theme_classic()
 
 ```
@@ -688,12 +688,12 @@ car <- car %>%
 ```{r eval=FALSE, include=FALSE}
 do <- get_tidy_audio_analysis("2XEIsAqCiaXGoJTWA8niyB")
 
-do <- do %>%
+do %>%
   tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) %>%
   ggplot(aes(x = time, y = bpm, fill = power)) +
   geom_raster() +
   scale_fill_viridis_c(guide = "none") +
-  labs(title="Wat Should I Do?", x = "Time (s)", y = "Tempo (BPM)") +
+  labs(title="What Should I Do?", x = "Time (s)", y = "Tempo (BPM)") +
   theme_classic()
 
 ```
@@ -701,7 +701,7 @@ do <- do %>%
 ```{r eval=FALSE, include=FALSE}
 sweet <- get_tidy_audio_analysis("0JXy7FKhnnewRDuhvkXpsH")
 
-sweet <- sweet %>%
+sweet %>%
   tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) %>%
   ggplot(aes(x = time, y = bpm, fill = power)) +
   geom_raster() +
@@ -714,7 +714,7 @@ sweet <- sweet %>%
 ![](images/shaggsgram2.jpg){width=100%}
 
 ***
-The fact that each member of the Shaggs is playing a different song is clearly visible form the tempograms of 
+The fact that each member of the Shaggs is playing a different song is clearly visible form the tempograms of _Philosophy of the World_, _That Little Sports Car_, _Sweet Thing_ and _What Should I Do?_. We can observe that the tempograms have a difficulty to recognize the tempo of these songs, this can be seen in the tempograms as there aren't many clear straight yellow lines that indicate a consistent tempo over a specific time frame. The difficulty in recognizing the tempo is mainly due to the fact that **the drummer, guitarist and singer all use different tempos**. 
 
 
 ### **Daniel Johnston** is all over the place. (pt. 1)
@@ -726,7 +726,7 @@ enter <-
   unnest(segments) %>%
   select(start, duration, pitches)
 
-enter <- enter %>%
+enter %>%
   mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
   compmus_gather_chroma() %>% 
   ggplot(
@@ -738,7 +738,7 @@ enter <- enter %>%
     )
   ) +
   geom_tile() +
-  labs(title="Chromagram: Sorry Entertainer, Daniel Johnson", x = "Time (s)", y = NULL, fill = "Magnitude") +
+  labs(title="Sorry Entertainer", x = "Time (s)", y = NULL, fill = "Magnitude") +
   theme_minimal() +
   scale_fill_viridis_c()
 ```
@@ -750,7 +750,7 @@ shoes <-
   unnest(segments) %>%
   select(start, duration, pitches)
 
-shoes <- shoes %>%
+shoes %>%
   mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
   compmus_gather_chroma() %>% 
   ggplot(
@@ -762,7 +762,7 @@ shoes <- shoes %>%
     )
   ) +
   geom_tile() +
-  labs(title="Chromagram: Worried Shoes, Daniel Johnson", x = "Time (s)", y = NULL, fill = "Magnitude") +
+  labs(title="Worried Shoes", x = "Time (s)", y = NULL, fill = "Magnitude") +
   theme_minimal() +
   scale_fill_viridis_c()
 
@@ -772,7 +772,7 @@ shoes <- shoes %>%
 
 ***
 
-A common feature of Daniel Johnson's music is that his songs typically do not have a dominant pitch, this becomes clear when we look at some chromagrams. A chromagram is a plot of a song showing the pitch registered at every second. When a pitch is registered a yellow bar is plotted in the corresponding pitch class, its brightness is determined by the magnitude. When we look at these two chromagrams of _Sorry Entertainer_ and _Worried Shoes_, we can see that both tracks do not have a dominant pitch. The former has a heavy emphasis on the A and G#|Ab pitch and the latter on the B and F#|Gb. 
+A common feature of Daniel Johnson's music is that his songs typically do not have a dominant pitch, this becomes clear when we look at some chromagrams. A chromagram is a plot of a song showing the pitch registered at every second. When a pitch is registered a yellow bar is plotted in the corresponding pitch class, its brightness is determined by the magnitude. When we look at these two chromagrams of _Sorry Entertainer_ and _Worried Shoes_, we can see that both **tracks do not have a dominant pitch**. The former has a heavy emphasis on the A and G#|Ab pitch and the latter on the B and F#|Gb. 
 
 ### **Daniel Johnston** is all over the place. (pt. 2)
 
@@ -783,7 +783,7 @@ columbo <-
   unnest(segments) %>%
   select(start, duration, pitches)
 
-columbo <- columbo %>%
+columbo %>%
   mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
   compmus_gather_chroma() %>% 
   ggplot(
@@ -795,7 +795,7 @@ columbo <- columbo %>%
     )
   ) +
   geom_tile() +
-  labs(title="Chromagram: Who Killed John Columbo, Wesley Willis", x = "Time (s)", y = NULL, fill = "Magnitude") +
+  labs(title="Who Killed John Columbo, Wesley Willis", x = "Time (s)", y = NULL, fill = "Magnitude") +
   theme_minimal() +
   scale_fill_viridis_c()
 
@@ -809,7 +809,7 @@ easy <-
   unnest(segments) %>%
   select(start, duration, pitches)
 
-easy <- easy %>%
+easy %>%
   mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
   compmus_gather_chroma() %>% 
   ggplot(
@@ -821,7 +821,7 @@ easy <- easy %>%
     )
   ) +
   geom_tile() +
-  labs(title="Chromagram: Living Is Easy, B.J. Snowden", x = "Time (s)", y = NULL, fill = "Magnitude") +
+  labs(title="Living Is Easy, B.J. Snowden", x = "Time (s)", y = NULL, fill = "Magnitude") +
   theme_minimal() +
   scale_fill_viridis_c()
 ```
@@ -834,7 +834,7 @@ halloween <-
   unnest(segments) %>%
   select(start, duration, pitches)
 
-halloween <- halloween %>%
+halloween %>%
   mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
   compmus_gather_chroma() %>% 
   ggplot(
@@ -846,7 +846,7 @@ halloween <- halloween %>%
     )
   ) +
   geom_tile() +
-  labs(title="Chromagram: It's Halloween, The Shaggs", x = "Time (s)", y = NULL, fill = "Magnitude") +
+  labs(title="It's Halloween, The Shaggs", x = "Time (s)", y = NULL, fill = "Magnitude") +
   theme_minimal() +
   scale_fill_viridis_c()
 
@@ -860,7 +860,7 @@ dad <-
   unnest(segments) %>%
   select(start, duration, pitches)
 
-dad <- dad %>%
+dad %>%
   mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
   compmus_gather_chroma() %>% 
   ggplot(
@@ -872,7 +872,7 @@ dad <- dad %>%
     )
   ) +
   geom_tile() +
-  labs(title="Chromagram: Daddy, Daddy What Is Heaven Like, Tiny Tim", x = "Time (s)", y = NULL, fill = "Magnitude") +
+  labs(title="Daddy, Daddy What Is Heaven Like, Tiny Tim", x = "Time (s)", y = NULL, fill = "Magnitude") +
   theme_minimal() +
   scale_fill_viridis_c()
 
@@ -883,8 +883,7 @@ dad <- dad %>%
 
 ***
 
-When we compare Daniel Johnson's chromagrams to some of his outsider peers', his unique quality becomes even more evident. When we look at these particular songs of B.J. Snowden, The Shaggs, and Tiny Tim, we can see that these all have a dominant pitch, which is G. Wesley Willis' _Who Killed John Columbo_ has a dominant pitch of A. 
-Daniel Johnson had the highest variance in cohesiveness score, his chromagrams give us a 
+When we compare Daniel Johnson's chromagrams to some of his outsider peers', his unique quality becomes even more evident. When we look at these particular songs of B.J. Snowden, The Shaggs, and Tiny Tim, we can see that these all have a dominant pitch, which is G. Wesley Willis' _Who Killed John Columbo_ has a dominant pitch of A. Daniel Johnson had the highest variance in cohesiveness score, his chromagrams give us a glimpse into why this is, as **tracks usually do not have a dominant pitch and the pitches vary a lot between his tracks**.  
 
 
 ### All **Wesley Willis** songs are the same. (pt. 1)
@@ -1034,77 +1033,206 @@ bind_rows(
   labs(x = "", y = "")
 ```
 
+### **Tiny Tim** is the most succesful outsider mucisian, but why? (pt. 1)
+![](images/novelty.jpg){width=100%}
+
+***
+
+TEST
+
+### **Tiny Tim** is the most succesful outsider mucisian, but why? (pt. 2)
+
+![](images/ctempo.jpg){width=100%}
+
+
+***
+
+TEST
+
 ### All outdider musicians are **unique**, this means that the genre outsider music **cannot be generalized** trough their track features. 
 
+
 ```{r eval=FALSE, include=FALSE}
-sun <- get_tidy_audio_analysis("1PmXm1881bonBI1AlG5uaH")
+timnov <-
+  get_tidy_audio_analysis("1PmXm1881bonBI1AlG5uaH") %>%
+  select(segments) %>%
+  unnest(segments)
 
-sun %>%
-  tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) %>%
-  ggplot(aes(x = time, y = bpm, fill = power)) +
-  geom_raster() +
-  scale_fill_viridis_c(guide = "none") +
-  labs(x = "Time (s)", y = "Tempo (BPM)") +
-  theme_classic()
+timnov %>%
+  mutate(loudness_max_time = start + loudness_max_time) %>%
+  arrange(loudness_max_time) %>%
+  mutate(delta_loudness = loudness_max - lag(loudness_max)) %>%
+  ggplot(aes(x = loudness_max_time, y = pmax(0, delta_loudness))) +
+  geom_line() +
+  xlim(0, 126) +
+  ylim(0, 30) +
+  theme_minimal() +
+  labs(title="Livin' in the Sunlight, Lovin' in the Moon Light", x = "Time (s)", y = "Novelty")
+```
 
+
+```{r eval=FALSE, include=FALSE}
+timnov2 <-
+  get_tidy_audio_analysis("1Vchex0xowRj9k59RLvRfo") %>%
+  select(segments) %>%
+  unnest(segments)
+
+timnov2 %>%
+  mutate(loudness_max_time = start + loudness_max_time) %>%
+  arrange(loudness_max_time) %>%
+  mutate(delta_loudness = loudness_max - lag(loudness_max)) %>%
+  ggplot(aes(x = loudness_max_time, y = pmax(0, delta_loudness))) +
+  geom_line() +
+  xlim(0, 111) +
+  ylim(0, 30) +
+  theme_minimal() +
+  labs(title="Tip Toe Thru' the Tulips with Me", x = "Time (s)", y = "Novelty")
 ```
 
 ```{r eval=FALSE, include=FALSE}
-tulips <- get_tidy_audio_analysis("1Vchex0xowRj9k59RLvRfo")
+timnov3 <-
+  get_tidy_audio_analysis("0nqiDIYL8C8FFNKqY9vAJI") %>%
+  select(segments) %>%
+  unnest(segments)
 
-tulips %>%
-  tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) %>%
-  ggplot(aes(x = time, y = bpm, fill = power)) +
-  geom_raster() +
-  scale_fill_viridis_c(guide = "none") +
-  labs(x = "Time (s)", y = "Tempo (BPM)") +
-  theme_classic()
-
-```
-```{r eval=FALSE, include=FALSE}
-near <- get_tidy_audio_analysis("2WhRJwrsy57H5Mm1P3lykJ")
-
-near %>%
-  tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) %>%
-  ggplot(aes(x = time, y = bpm, fill = power)) + 
-  geom_raster() +
-  scale_fill_viridis_c(guide = "none") +
-  labs(x = "Time (s)", y = "Tempo (BPM)") +
-  theme_classic()
-
+timnov3 %>%
+  mutate(loudness_max_time = start + loudness_max_time) %>%
+  arrange(loudness_max_time) %>%
+  mutate(delta_loudness = loudness_max - lag(loudness_max)) %>%
+  ggplot(aes(x = loudness_max_time, y = pmax(0, delta_loudness))) +
+  geom_line() +
+  xlim(0, 220) +
+  ylim(0, 30) +
+  theme_minimal() +
+  labs(title="On the Old Front Porch", x = "Time (s)", y = "Novelty")
 ```
 
-```{r eval=FALSE, include=FALSE}
-canada <- get_tidy_audio_analysis("25dIBpehsuaeHlALc09HBJ")
+```{r}
+shaggsnov <-
+  get_tidy_audio_analysis("2WhRJwrsy57H5Mm1P3lykJ") %>%
+  select(segments) %>%
+  unnest(segments)
 
-canada %>%
-  tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) %>%
-  ggplot(aes(x = time, y = bpm, fill = power)) +
-  geom_raster() +
-  scale_fill_viridis_c(guide = "none") +
-  labs(x = "Time (s)", y = "Tempo (BPM)") +
-  theme_classic()
-
+shaggsnov %>%
+  mutate(loudness_max_time = start + loudness_max_time) %>%
+  arrange(loudness_max_time) %>%
+  mutate(delta_loudness = loudness_max - lag(loudness_max)) %>%
+  ggplot(aes(x = loudness_max_time, y = pmax(0, delta_loudness))) +
+  geom_line() +
+  xlim(0, 178) +
+  ylim(0, 30) +
+  theme_minimal() +
+  labs(title="Philosophy of the World, The Shaggs", x = "Time (s)", y = "Novelty")
 ```
-```{r eval=FALSE, include=FALSE}
-jesus <- get_tidy_audio_analysis("2Od8Vrqg0SAqVTLMHCMmWU")
+```{r}
+willisnov <-
+  get_tidy_audio_analysis("2Od8Vrqg0SAqVTLMHCMmWU") %>%
+  select(segments) %>%
+  unnest(segments)
 
-jesus %>%
-  tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) %>%
-  ggplot(aes(x = time, y = bpm, fill = power)) +
-  geom_raster() +
-  scale_fill_viridis_c(guide = "none") +
-  labs(x = "Time (s)", y = "Tempo (BPM)") +
-  theme_classic()
+willisnov %>%
+  mutate(loudness_max_time = start + loudness_max_time) %>%
+  arrange(loudness_max_time) %>%
+  mutate(delta_loudness = loudness_max - lag(loudness_max)) %>%
+  ggplot(aes(x = loudness_max_time, y = pmax(0, delta_loudness))) +
+  geom_line() +
+  xlim(0, 207) +
+  ylim(0, 30) +
+  theme_minimal() +
+  labs(title="I Whipped Batman's Ass, Wesley Willis", x = "Time (s)", y = "Novelty")
+```
 
+```{r}
+snowdennov <-
+  get_tidy_audio_analysis("25dIBpehsuaeHlALc09HBJ") %>%
+  select(segments) %>%
+  unnest(segments)
+
+snowdennov %>%
+  mutate(loudness_max_time = start + loudness_max_time) %>%
+  arrange(loudness_max_time) %>%
+  mutate(delta_loudness = loudness_max - lag(loudness_max)) %>%
+  ggplot(aes(x = loudness_max_time, y = pmax(0, delta_loudness))) +
+  geom_line() +
+  xlim(0, 211) +
+  ylim(0, 30) +
+  theme_minimal() +
+  labs(title="In Canada, B.J. Snowden", x = "Time (s)", y = "Novelty")
 ```
 
 ```{r eval=FALSE, include=FALSE}
-graveola %>%
+s <- get_tidy_audio_analysis("1PmXm1881bonBI1AlG5uaH")
+
+s %>%
   tempogram(window_size = 8, hop_size = 1, cyclic = TRUE) %>%
   ggplot(aes(x = time, y = bpm, fill = power)) +
   geom_raster() +
   scale_fill_viridis_c(guide = "none") +
-  labs(x = "Time (s)", y = "Tempo (BPM)") +
+  labs(title="Livin' in the Sunlight, Lovin' in the Moon Light", x = "Time (s)", y = "Tempo (BPM)") +
+  theme_classic()
+```
+
+```{r eval=FALSE, include=FALSE}
+tul <- get_tidy_audio_analysis("1Vchex0xowRj9k59RLvRfo")
+
+
+tul %>%
+  tempogram(window_size = 8, hop_size = 1, cyclic = TRUE) %>%
+  ggplot(aes(x = time, y = bpm, fill = power)) +
+  geom_raster() +
+  scale_fill_viridis_c(guide = "none") +
+  labs(title="Tip Toe Thru' the Tulips with Me", x = "Time (s)", y = "Tempo (BPM)") +
+  theme_classic()
+```
+
+```{r eval=FALSE, include=FALSE}
+por <- get_tidy_audio_analysis("0nqiDIYL8C8FFNKqY9vAJI")
+
+por %>%
+  tempogram(window_size = 8, hop_size = 1, cyclic = TRUE) %>%
+  ggplot(aes(x = time, y = bpm, fill = power)) +
+  geom_raster() +
+  scale_fill_viridis_c(guide = "none") +
+  labs(title="On the Old Front Porch", x = "Time (s)", y = "Tempo (BPM)") +
+  theme_classic()
+```
+
+
+
+```{r eval=FALSE, include=FALSE}
+shagg <- get_tidy_audio_analysis("2WhRJwrsy57H5Mm1P3lykJ")
+
+shagg %>%
+  tempogram(window_size = 8, hop_size = 1, cyclic = TRUE) %>%
+  ggplot(aes(x = time, y = bpm, fill = power)) +
+  geom_raster() +
+  scale_fill_viridis_c(guide = "none") +
+  labs(title="Philosophy of the World, The Shaggs", x = "Time (s)", y = "Tempo (BPM)") +
+  theme_classic()
+
+```
+
+```{r eval=FALSE, include=FALSE}
+will <- get_tidy_audio_analysis("2Od8Vrqg0SAqVTLMHCMmWU")
+
+will %>%
+  tempogram(window_size = 8, hop_size = 1, cyclic = TRUE) %>%
+  ggplot(aes(x = time, y = bpm, fill = power)) +
+  geom_raster() +
+  scale_fill_viridis_c(guide = "none") +
+  labs(title="I Whipped Batman's Ass, Wesley Willis", x = "Time (s)", y = "Tempo (BPM)") +
+  theme_classic()
+
+```
+
+```{r eval=FALSE, include=FALSE}
+snow <- get_tidy_audio_analysis("25dIBpehsuaeHlALc09HBJ")
+
+snow %>%
+  tempogram(window_size = 8, hop_size = 1, cyclic = TRUE) %>%
+  ggplot(aes(x = time, y = bpm, fill = power)) +
+  geom_raster() +
+  scale_fill_viridis_c(guide = "none") +
+  labs(title="In Canada, B.J. Snowden", x = "Time (s)", y = "Tempo (BPM)") +
   theme_classic()
 ```
