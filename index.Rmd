@@ -1107,7 +1107,7 @@ timnov3 %>%
   labs(title="On the Old Front Porch", x = "Time (s)", y = "Novelty")
 ```
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 shaggsnov <-
   get_tidy_audio_analysis("2WhRJwrsy57H5Mm1P3lykJ") %>%
   select(segments) %>%
@@ -1124,7 +1124,7 @@ shaggsnov %>%
   theme_minimal() +
   labs(title="Philosophy of the World, The Shaggs", x = "Time (s)", y = "Novelty")
 ```
-```{r}
+```{r eval=FALSE, include=FALSE}
 willisnov <-
   get_tidy_audio_analysis("2Od8Vrqg0SAqVTLMHCMmWU") %>%
   select(segments) %>%
@@ -1142,7 +1142,7 @@ willisnov %>%
   labs(title="I Whipped Batman's Ass, Wesley Willis", x = "Time (s)", y = "Novelty")
 ```
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 snowdennov <-
   get_tidy_audio_analysis("25dIBpehsuaeHlALc09HBJ") %>%
   select(segments) %>%
