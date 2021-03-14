@@ -48,6 +48,37 @@ albums <- list(snowden_album, eilert_album, willis_album, tim_album, shaggs_albu
 
 ```
 
+### [NEW] **The Shaggs** a band of three, each playing a different song (pt.1)
+
+![](images/shaggsgram.jpg){width=100%}
+
+***
+
+The Shaggs have been described as a band consisting of three members, each playing a totally different song. An important factor is their drummer who plays a constant pattern throughout the entire track. **Often the track opens and closes with the only the drummer playing**, this is clearly visible in the keygrams of _Philosophy of the World_, _My Pal Foot Foot_, _Why Do I Feel?_ and _I'm so Happy When You're Near_. I the keygrams we can see that there usually is an activation of all keys in the beginning and end, this indicates that there is no single key observable. What the keygram does observe is the percussion, which is key-less, hence it spans over all the keys. 
+
+### [NEW] **The Shaggs** a band of three, each playing a different song (pt.2)
+
+![](images/shaggsgram2.jpg){width=100%}
+
+***
+The fact that each member of the Shaggs is playing a different song is clearly visible form the tempograms of _Philosophy of the World_, _That Little Sports Car_, _Sweet Thing_ and _What Should I Do?_. We can observe that the tempograms have a difficulty to recognize the tempo of these songs, this can be seen in the tempograms as there aren't many clear straight yellow lines that indicate a consistent tempo over a specific time frame. The difficulty in recognizing the tempo is mainly due to the fact that **the drummer, guitarist and singer all use different tempos**.
+
+### [NEW] **Tiny Tim** is the most succesful outsider mucisian, but why? (pt. 1)
+![](images/novelty.jpg){width=100%}
+
+***
+
+TEST
+
+### [NEW] **Tiny Tim** is the most succesful outsider mucisian, but why? (pt. 2)
+
+![](images/ctempo.jpg){width=100%}
+
+***
+
+TEST
+
+
 ### Outsiders: **idiosyncratic** and **unconnected** from conventional art **by circumstance**.
 
 Outsider music is a derivative of <a href="https://www.britannica.com/art/outsider-art">outsider art</a>, which is defined as "any work of art produced by an untrained idiosyncratic artist who is typically unconnected to the conventional art world—not by choice but by circumstance." Its defining feature is "the tendency of the artists to be “straight talking” (even if that talk is straight from a radically different worldview)." In 2000, Irwin Chusid conceptualized the term outsider music in his book: Songs in the Key of Z, in which he explores the field of outsider music by highlighting its most prominent artists. Chusid defines outsider music as "crackpot and visionary music, where all trails lead essentially one place: over the edge." The book was accompanied by two compilation albums that featured a variety of outsider musicians. 
