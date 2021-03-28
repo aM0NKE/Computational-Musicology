@@ -1,7 +1,7 @@
 ---
 title: "The Essence of Outsider Music"
 author: "River Vaudrin"
-date: "15 March 2021"
+date: "29 March 2021"
 output: 
   flexdashboard::flex_dashboard:
     storyboard: true
@@ -52,15 +52,15 @@ albums <- list(snowden_album, eilert_album, willis_album, tim_album, shaggs_albu
 ```
 
 
-### Outsiders: **idiosyncratic** and **unconnected** from conventional art **by circumstance**.
+### Outsider Mucisans: **idiosyncratic** and **unconnected** from conventional art **by circumstance**.
 
-Outsider music is a derivative of <a href="https://www.britannica.com/art/outsider-art">outsider art</a>, which is defined as "any work of art produced by an untrained idiosyncratic artist who is typically unconnected to the conventional art world—not by choice but by circumstance." Its defining feature is "the tendency of the artists to be “straight talking” (even if that talk is straight from a radically different worldview)." In 2000, Irwin Chusid conceptualized the term outsider music in his book: Songs in the Key of Z, in which he explores the field of outsider music by highlighting its most prominent artists. Chusid defines outsider music as "crackpot and visionary music, where all trails lead essentially one place: over the edge." The book was accompanied by two compilation albums that featured a variety of outsider musicians. 
+Outsider music is a derivative of <a href="https://www.britannica.com/art/outsider-art">outsider art</a>, which is defined as "any work of art produced by an untrained idiosyncratic artist who is typically unconnected to the conventional art world—not by choice but by circumstance." Its defining feature is "the tendency of the artists to be “straight talking” (even if that talk is straight from a radically different worldview)." In 2000, Irwin Chusid conceptualized the term outsider music in his book: _Songs in the Key of Z_, in which he explores the field of outsider music by highlighting its most prominent artists. Chusid defines outsider music as "crackpot and visionary music, where all trails lead essentially one place: over the edge." The book was accompanied by two compilation albums that featured a variety of outsider musicians. 
 
-These definitions are quite vague, however, I think that we can make it less ambiguous if we look at the differences between outsider musicians and other idiosyncratic musicians that make unconventional music. The first difference is that outsider musicians create unconventional art by circumstance, and not by choice. "By circumstance" can be interpreted in multiple ways. One interpretation is easily noticeable from Chusid's categorization, and that is that most of the artists have some kind of mental disorder. Tiny Tim had asperger's syndrome, Wesley Willis was a schizophrenic, and Daniel Johnson was both schizophrenic and bipolar. In other words, their unconventionality stemmed from their disorders. Another interpretation is exemplified by The Shaggs, they were a band comprised of three teenage sisters in 1968 formed by their father. One day their father received news from his fortune teller mother that his daughters would become famous musicians, even though his daughters didn't have any experience in making music. Although, after hearing this prophecy he withdrew his daughters from school and sold some family belongings to purchase his daughters' instruments, and so the band was formed. These kids essentially had no choice than to play music, and their inexperience shines trough on their first album Philosophy of the World. Despite the quality of their music, the Shaggs were praised by fellow musicians as, Frank Zappa calling them "better than The Beatles" and Kurt Cobain who listed the Philosophy of the World as his fifth favorite LP of all time.
+These definitions are quite vague, however, I think that we can make it less ambiguous if we look at the differences between outsider musicians and other idiosyncratic musicians that make unconventional music. The first difference is that outsider musicians create unconventional art by circumstance, and not by choice. "By circumstance" can be interpreted in multiple ways. One interpretation is easily noticeable from Chusid's categorization, and that is that most of the artists have some kind of mental disorder. Tiny Tim had asperger's syndrome, Wesley Willis was a schizophrenic, and Daniel Johnson was both schizophrenic and bipolar. In other words, their unconventionality stemmed from their disorders. Another interpretation is exemplified by The Shaggs, they were a band comprised of three teenage sisters formed by their father in 1968. Their story goes as follows, one day their father received news from his fortune teller mother that his daughters would become famous musicians, even though his daughters didn't have any experience in making music. After hearing this prophecy he withdrew his daughters from school and sold some family belongings to purchase his daughters' instruments, and so the band was formed. These "regular" children essentially had no choice than to play music, and their inexperience shines trough on their first album _Philosophy of the World_. Despite the quality of their music, the Shaggs were praised by fellow musicians, Frank Zappa called them "better than The Beatles" and Kurt Cobain listed _Philosophy of the World_ as his fifth favorite LP of all time.
 
 Another key difference that sets outsider musicians apart is the amateurish sound of their music. If the definition of an outsider musician is a musician that makes unconventional music by circumstance, then we would have to consider Beach Boys' Brian Wilson as an outsider musician as well, as he was, like Daniel Johnson, diagnosed with schizophrenia and bipolar disorder. However, Wilson's music is far more commercially successful than all of the outsider musicians mentioned by Chusid, I think that this is due to the fact that his music doesn't poses an amateurish quality. In summary, his means that the two defining features of outsider music are that it sounds amateuristic, and that it sounds unconventional because of the circumstances the musicians find themselves in. 
 
-The goal is to determine whether it is possible to categorize these outsider musicians on the basis of their computational properties. This will be done by analyzing the corpus with the track-based features provided by Spotify, alongside popular Music Information Retrieval (MIR) techniques. My corpus will consist of six albums created by artists that can be found on the compilation albums of Chusid's Songs in the Key of Z. The artists that will be analysed can be seen below.
+My goal is to determine whether it is possible to categorize these outsider musicians on the basis of their computational musical features. This will be done by analyzing the corpus with the track-based features provided by Spotify, alongside popular Music Information Retrieval (MIR) techniques. My corpus will consist of six albums created by artists that can be found on the compilation albums of Chusid's Songs in the Key of Z. The artists that will be analyzed can be seen below, and the corpus is listed in the panel on the right.
 
 
 ![B.J. Snowden](images/snowden.jpg){width=20%}
@@ -81,12 +81,12 @@ The goal is to determine whether it is possible to categorize these outsider mus
 
 **Corpus:**
 
- - Life In the USA and Canada, by B.J. Snowden
- - Eilert Is Back, by Eilert Pilarm
- - Rush Hour, Wesley Willis
- - God Bless Tiny Tim, by Tiny Tim
- - Philosophy of the World, by The Shaggs
- - Yip! Jump Music, by Daniel Johnston
+ - _Life In the USA and Canada_, by B.J. Snowden
+ - _Eilert Is Back_, by Eilert Pilarm
+ - _Rush Hour_, Wesley Willis
+ - _God Bless Tiny Tim_, by Tiny Tim
+ - _Philosophy of the World_, by The Shaggs
+ - _Yip/Jump Music_, by Daniel Johnston
  
 _Note_: these albums were chosen in particular because they are the most popular album of each artist. 
  
@@ -190,12 +190,12 @@ To examine if outsiders can be categorized by mood, I plotted the mean valence a
 
 When we look at these results, we can see that all albums are relatively close to the center of the plot. This means that we cannot confidently match any album to a certain mood. We can only conclude that Tiny Tim's album is less energetic than all of the other albums, and that Wesley Willis' album is more energetic than the other albums. Another interesting finding is that all of the albums are not overly positive or negative, all of the albums have a similar valence centered around 0.5.
 
-However, the main take-away is that we cannot generalize these outsider musicians trough the mood of their music. 
+However, the main take-away is that **we cannot generalize these outsider musicians trough the mood of their music.**
 
-In the plot on the right we can interestingly see that, for all of the artists, the mood of their albums (in the corpus) are consistent throughout their entire discographies. Thus the corpus is an accurate representation of the artists' entire music catalog. Another assumption we can make based on this outcome is, that the artists did not experiment a lot when it comes to valence and energy throughout their careers.
+In the plot on the right we can interestingly see that, for all of the artists, the mood of their albums (in the corpus) are consistent throughout their entire discographies. Thus the corpus is an accurate representation of the artists' entire music catalog. Another assumption we can make based on this outcome is, that **the artists did not experiment a lot when it comes to valence and energy throughout their careers.**
 
 
-### The outsiders all sound **different**.
+### Outsiders all **sound different**.
 
 ```{r cohesivenessplot, echo=FALSE, message=FALSE, warning=FALSE}
 danceability_valence_energy_albums <- albums %>% 
@@ -232,9 +232,9 @@ To delve deeper into the sound of each album, I introduce a coheisiveness score 
 
 ***
 
-From these results we can observe a couple of findings. First, we can see that Wesley Willis's album is the most cohesive, meaning that all of his songs sound similar. This is no surprise when we take into account that all of his songs have the exact same song structure, alongside the fact that all of his basically sound the same, a topic that will be further explored in a latter section. 
+From these results we can observe a couple of findings. First, we can see that **Wesley Willis's album is the most cohesive, meaning that all of his songs sound similar.** This is no surprise when we take into account that all of his songs have the exact same song structure, alongside the fact that all of his basically sound the same, a topic that will be further explored in a latter section. 
 
-Another finding is that Eilert Is Back, Godbless Tiny Tim and Yip Jump Music all have a high variance in cohesiveness score, meaning that they have a wide variety in songs (in the case of Eilert Pilarm's album this is not so strange, as it is essentially an Elvis compilation album). This is contrasted by Life In the USA and Canada and Philosophy of the World, which are albums that consist of songs that are more similar to eachother. 
+Another finding is that **_Eilert Is Back_, _Godbless Tiny Tim_ and _Yip/Jump Music_ all have a high variance in cohesiveness score, meaning that they have a wide variety in songs** (in the case of Eilert Pilarm's album this is not so strange, as it is essentially an Elvis compilation album). This is contrasted by Life In the USA and Canada and Philosophy of the World, which are albums that consist of songs that are more similar to eachother.
 
 
 ### Some tracks aren't regular. (pt. 1)
@@ -254,11 +254,13 @@ ggplotly(spokenwordplot)
 
 ***
 
-Next I wanted to determine what songs are outliers. When we look at speechiness, which Spotify defines as:
+To examine the corpus is more detail, I wanted to determine what songs are outliers. When we look at the Spotify feature: speechiness, which is defines as:
 
 - Speechiness: detects the presence of spoken words in a track. The more exclusively speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value. Values above 0.66 describe tracks that are probably made entirely of spoken words. Values between 0.33 and 0.66 describe tracks that may contain both music and speech, either in sections or layered, including such cases as rap music. Values below 0.33 most likely represent music and other non-speech-like tracks.
 
-We can see that only three songs in the entire corpus are spoken word songs according to Spotify. Eilert Pilarm, B.J. Snowden, The Shaggs, and Wesley Willis all refrained from making spoken word tracks.
+***
+
+We can see that only **three songs in the entire corpus are spoken word songs** according to Spotify. Eilert Pilarm, B.J. Snowden, The Shaggs, and Wesley Willis all refrained from making spoken word tracks.
 
 ### Some tracks aren't regular. (pt. 2)
 
@@ -276,11 +278,14 @@ ggplotly(instrumentalplot)
 ```
 
 ***
+
 When it comes to instrumentalness, which Spotify defines as:
 
 - Instrumentalness: predicts whether a track contains no vocals. “Ooh” and “aah” sounds are treated as instrumental in this context. Rap or spoken word tracks are clearly “vocal”. The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no vocal content. Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as the value approaches 1.0.
 
-We can see that six songs in the entire corpus are instrumental songs songs according to Spotify. Eilert Pilarm, The Shaggs, and Wesley Willis all refrained from making instrumental music.
+***
+
+We can see that **six songs in the entire corpus are instrumental songs** according to Spotify. In this case, Eilert Pilarm, The Shaggs, and Wesley Willis all refrained from making instrumental music.
 
 ### The **Swedish Elvis** is pretty similar to his American counterpart. (pt. 1)
 
@@ -327,9 +332,9 @@ compmus_long_distance(
 
 ***
 
-Dynamic Time Warping is a technique in MIR used to compare pitches of two versions of a song into one single visualization. If the two versions are similar a diagonal line should become visible. Here we can see two renditions of _Silent Night_, this song was chosen in particular because it is the only song that has two versions with the exact same runtime. Most of Eilert's versions are a bit shorter. Why you ask? perhaps I will explore this furter in the future. 
+Now that we have seen glimpses that there are differences between these musicians, I think it would be a good idea to delve deeper into the differences between these outsiders by utilizing some common MIR techniques. Lets start with the Swedish Elvis himself, by comparing him to his US counterpart. 
 
-Anyhow, in the plot we can vaguely see a diagonal line, however, it is not 100% clear. If it was, that would mean that the songs are on the same pitch for every second of the track. In the case of _Silent Night_ this is not the case, but the fact that a diagonal line is visible indicates that there is quite an **overlap in pitch between the two versions**. 
+The first technique we can use is Dynamic Time Warping, this technique is used to compare pitches of two versions of a song into one single visualization. If the two versions are similar a diagonal line should become visible. In the DTW on the left we can see two renditions of _Silent Night_, in it we can vaguely see a diagonal line, however, it is not 100% clear. If it was, that would mean that the songs are on the same pitch for every second of the track. In the case of _Silent Night_ this is not the case, but the fact that a diagonal line is visible indicates that there is quite an **overlap in pitch between the two versions**. 
 
 
 ### The **Swedish Elvis** is pretty similar to his American counterpart. (pt. 2)
@@ -396,7 +401,7 @@ fig
 
 ***
 
-The radar plot shows the mean of every numeric Spotify parameter for _Eilert Is Back_ and a playlist comprised of Elvis songs that is identical to the tracklist of _Eilert Is Back_. The results show that there is **very little difference between Eilert and Elvis** their renditions. The only notable differences are that Eilert's versions are overall a bit more energetic and less positive. 
+We can neatly compare Spotify's track-level features of the two Kings of Rock, in a radar plot. The radar plot on the left shows the mean of every numeric Spotify parameter for _Eilert Is Back_ and a playlist comprised of Elvis songs that is identical to the tracklist of _Eilert Is Back_. The results show that there is **very little difference between Eilert and Elvis their track-level features**. The only notable differences are that Eilert's versions are overall a bit more energetic and less positive. 
 
 ### The **Swedish Elvis** is pretty similar to his American counterpart. (pt. 3)
 
@@ -442,10 +447,15 @@ outsiders %>%
 ```
 
 ***
-When we look at Spotify's Timbre coefficients for both Eilert and Elvis, we can observe two things. The first is that the mean of all of the coefficients is relatively similar for both artists. Second is that the variance, for the c02, c03, c04 and c05 is higher for Elvis.
+
+My final comparison takes a look at Spotify's Timbre coefficients, from the plot of these coefficients we can observe two things. The first is that the mean of all of the coefficients is relatively similar for both artists. Second is that the variance, for the c02, c03, c04 and c05 is higher for Elvis. This means that **the two have a very similar timbre**, and that Elvis perhaps has more outliers when it comes to the mentioned coefficients. 
+
+***
+
+Overall it seems like there is little difference between Eilert and Elivs, when we look at the computational musical features. When listing to the two the obvious difference is Eilert's thick Swedish accent, this is perhaps a feature that isn't well represented yet, and thus **from an computational musicologists perspective there isn't much difference between the two.** 
 
 
-### **The Shaggs** a band of three, each playing a different song (pt.1)
+### **The Shaggs** a band of three, each playing a different song. (pt.1)
 
 ```{r eval=FALSE, include=FALSE}
 circshift <- function(v, n) {
@@ -656,9 +666,9 @@ happy <- happy %>%
 
 ***
 
-The Shaggs have been described as a band consisting of three members, each playing a totally different song. An important factor is their drummer who plays a constant pattern throughout the entire track. **Often the track opens and closes with the only the drummer playing**, this is clearly visible in the keygrams of _Philosophy of the World_, _My Pal Foot Foot_, _Why Do I Feel?_ and _I'm so Happy When You're Near_. I the keygrams we can see that there usually is an activation of all keys in the beginning and end, this indicates that there is no single key observable. What the keygram does observe is the percussion, which is key-less, hence it spans over all the keys. 
+The second outsider artist we are going to take a look at are The Shaggs, which have been described as a band consisting of three members, each playing a totally different song. An important factor is their drummer who plays a constant pattern throughout the entire track. **Often the track opens and closes with the only the drummer playing**, this is clearly visible in the keygrams of _Philosophy of the World_, _My Pal Foot Foot_, _Why Do I Feel?_ and _I'm so Happy When You're Near_. In the keygrams we can see that there usually is an activation of all keys in the beginning and end, this indicates that there is no single key observable. What the keygram does observe is the percussion, which is key-less, hence it spans over all the keys.
 
-### **The Shaggs** a band of three, each playing a different song (pt.2)
+### **The Shaggs** a band of three, each playing a different song. (pt.2)
 ```{r eval=FALSE, include=FALSE}
 world <- get_tidy_audio_analysis("2WhRJwrsy57H5Mm1P3lykJ")
 
@@ -714,7 +724,8 @@ sweet %>%
 ![](images/shaggsgram2.jpg){width=100%}
 
 ***
-The fact that each member of the Shaggs is playing a different song is clearly visible form the tempograms of _Philosophy of the World_, _That Little Sports Car_, _Sweet Thing_ and _What Should I Do?_. We can observe that the tempograms have a difficulty to recognize the tempo of these songs, this can be seen in the tempograms as there aren't many clear straight yellow lines that indicate a consistent tempo over a specific time frame. The difficulty in recognizing the tempo is mainly due to the fact that **the drummer, guitarist and singer all use different tempos**. 
+
+The fact that each member of the Shaggs seems to be playing a different song is clearly visible form the tempograms of _Philosophy of the World_, _That Little Sports Car_, _Sweet Thing_ and _What Should I Do?_. We can observe that the tempograms have a difficulty to recognize the tempo of these songs, this can be seen in the tempograms as there aren't many clear straight yellow lines that indicate a consistent tempo over a specific time frame. The difficulty in recognizing the tempo is mainly due to the fact that **the drummer, guitarist and singer all use different tempos.** This of course can be explained by the fact that each member of the band was playing their respective instrument for the first time in their life. 
 
 
 ### **Daniel Johnston** is all over the place. (pt. 1)
@@ -772,7 +783,7 @@ shoes %>%
 
 ***
 
-A common feature of Daniel Johnson's music is that his songs typically do not have a dominant pitch, this becomes clear when we look at some chromagrams. A chromagram is a plot of a song showing the pitch registered at every second. When a pitch is registered a yellow bar is plotted in the corresponding pitch class, its brightness is determined by the magnitude. When we look at these two chromagrams of _Sorry Entertainer_ and _Worried Shoes_, we can see that both **tracks do not have a dominant pitch**. The former has a heavy emphasis on the A and G#|Ab pitch and the latter on the B and F#|Gb. 
+Now lets get into Daniel Johnson. A common feature of Daniel Johnson's music is that his songs typically do not have a dominant pitch, this becomes clear when we look at some chromagrams. A chromagram is a plot of a song showing the pitch registered at every second. When a pitch is registered a yellow bar is plotted in the corresponding pitch class, its brightness is determined by the magnitude. When we look at these two chromagrams of _Sorry Entertainer_ and _Worried Shoes_, we can see that both **tracks do not have a dominant pitch.** The former has a heavy emphasis on the A and G#|Ab pitch and the latter on the B and F#|Gb. 
 
 ### **Daniel Johnston** is all over the place. (pt. 2)
 
@@ -883,7 +894,7 @@ dad %>%
 
 ***
 
-When we compare Daniel Johnson's chromagrams to some of his outsider peers', his unique quality becomes even more evident. When we look at these particular songs of B.J. Snowden, The Shaggs, and Tiny Tim, we can see that these all have a dominant pitch, which is G. Wesley Willis' _Who Killed John Columbo_ has a dominant pitch of A. Daniel Johnson had the highest variance in cohesiveness score, his chromagrams give us a glimpse into why this is, as **tracks usually do not have a dominant pitch and the pitches vary a lot between his tracks**.  
+When we compare Daniel Johnson's chromagrams to some of his outsider peers', his unique quality becomes even more evident. When we look at these particular songs of B.J. Snowden, The Shaggs, and Tiny Tim, we can see that these all have a dominant pitch, which is G. Wesley Willis' _Who Killed John Columbo_ has a dominant pitch of A. Daniel Johnson had the highest variance in cohesiveness score, his chromagrams give us a glimpse into why this is, as **tracks usually do not have a dominant pitch and the pitches vary a lot between his tracks.**  
 
 
 ### All **Wesley Willis** songs are the same. (pt. 1)
@@ -934,6 +945,11 @@ bind_rows(
   theme_classic() +
   labs(x = "", y = "")
 ```
+
+***
+I think you have gotten into the rhythm of things as of now, so next is Wesley Willis. I've already mentioned that Wesley Willis' songs all sound exactly the same, which also shows in the coheisiveness plot. The main difference between songs is the lyrical content, although Willis has made several songs about "whipping" other superhero asses, such as Superman's, Spiderman's and Robin's (fun fact: Wesley Willis has one song in which he gets his ass whipped: _Birdman Kicked My Ass_).  
+
+To 
 
 ### All **Wesley Willis** songs are the same. (pt. 2)
 
@@ -1038,7 +1054,13 @@ bind_rows(
 
 ***
 
-TEST
+Finally we come to the interesting case of Tiny Tim. I can already hear you thinking, but what about the analyses on B.J. Snowden? Well out of respect of her wishes (not wanting to be apart of Chusid's list of outsiders), and perhaps a bit of uninspiredness on my part, she will not have a series of visualizations dedicated to her, however as you have seen, she is used as comparison material. 
+
+But back to Tiny Tim, what makes his case so interesting is that he is arguably the most successful outsider musician, as he garnered mainstream attention. His music sill regularly being featured in movies and tv shows, like Spongebob and Insidious to name a few. 
+
+So why is he so successful? What sets him apart from the others? Well we can start by looking at the novelty functions displayed on the left. A novelty function shows all of the changes in a musical piece and their corresponding intensity. From these plots we can see that the three most popular songs of Tiny Tim have changes throughout the tracks with a similar intensity. This is in stark contrast to the high intensity changes on Wesley Willis' most popular song and the low intensity changes on The Shaggs' most popular track. B.J. Snowden's plot is relatively similar similar to Tiny Tim's plots, however, her most popular track, In Canada, its highest peaks aren't as high as any of Tiny Tim's tracks. 
+
+These plot already indicate that **there are some notable differences between the most popular tracks from these artists when it comes to changes in their music.** Next I will examine if there are differences in tempo, as I think this could give us an insight into why Tiny Tim's music is more commercially successful than that of his counterparts. 
 
 ### **Tiny Tim** is the most succesful outsider mucisian, but why? (pt. 2)
 
@@ -1047,22 +1069,25 @@ TEST
 
 ***
 
-TEST
+When we look at the cyclic tempograms of the most popular tracks of Tiny Tim, The Shaggs, Wesley Willis and B.J. Snowden, we can see a number of notable differences. We can first see that the tempo of _Philosophy of the World_ is undetectable, as earlier mentioned, and that _I Wipped Batman's Ass_ has a very constant tempo throughout. This makes these tempograms vastly different from those of Tiny Tim. In Tiny Tim's tempograms we can see that there is a constant tempo, with some speed ups and slow downs. The tempo changes makes Tiny Tim's top songs a lot more interesting than Wesley Willis' top song, and the presence of a consistent tempo makes his songs also a lot more listenable than The Shaggs' top track. B.J. Snowden's _In Canada_ tempogram, like Tiny Tim's, also show a constant tempo with slight tempo changes. However, _In Canada_ has a significantly lower tempo than any of Tiny Tim's top tracks.   
+
+I think that the combination of a relatively high constant tempo with some tempo changes makes **Tiny Tim's music more dynamic and energetic** and therefor it is more enjoyable to listen to. I think that this could be an explanation for his mainstream success. 
 
 ### All outdider musicians are **unique**, this means that the genre outsider music **cannot be generalized** trough their track features. (k-nearest neighbors)
-![](images/knnconfusionmatrix.png)
+![](images/knnconfusionmatrix.png){width=80%}
 
 ***
 
-![](images/knneval.png) 
+![](images/knneval.png){width=100%}
 
-Now that we have established that there are some substantial stylistic differences between these outsiders, we can understand why it is so difficult to generalize them by their musical features, it is simply because there is little sonic overlap. We can test this last statement by letting an algorithm decide whether he can determine what song belongs to what artist. If the algorithm succeeds to match a song to its artist, we can conclude that there little sonic overlap, as there are musical features tha .
+Now that we have established that there are some substantial stylistic differences between these outsiders, we can understand why it is so difficult to generalize them by their musical features, it is simply because there is little sonic overlap. We can test this last statement by letting an algorithm decide whether he can determine what song belongs to what artist on the basis of their computational musical features. If the algorithm succeeds to match a most of the songs in the corpus to their artist, we can conclude that there little sonic overlap between the artists, as the difference in musical features is great enough for an algorithm to confidently distinguish them.
 
-The first algorithm we use is a k-nearest neighbors classifier, with n=1. In the diagonal we can see the correct predictions of the algorithm. We can see that 
+The first algorithm I used is a <a href="https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm">k-nearest neighbors (KNN) classifier</a> (with k=1). The diagonal values shown in the plot on the left show the correct predictions of the algorithm for each album in the corpus. From these results we can see that the KNN algorithm is fairly well suited to classify the different musicians, this is also supported by the precision and recall measures that we can see above. The algorithm can accurately classify all of the songs on _Philosophy of the World_ and _Rush Hour_, and most on _Eilert is Back_ and _God Bless Tiny Tim_. The algorithm has more difficulty with _Yip/Jump Music_ and especially _Life in the USA and Canada_.
 
 ***
 
 **List of abbreviations:**
+
  - EIB = Eilert Is Back, Eilert Pilarm
  - GBTT = God Bless Tiny Tim, Tiny Tim
  - LitUaC = Life in the USA and Canada, B.J. Snowden
@@ -1070,24 +1095,29 @@ The first algorithm we use is a k-nearest neighbors classifier, with n=1. In the
  - Y/JM = Yip/Jump Muisc, Daniel Johnson
 
 
-### All outdider musicians are **unique**, this means that the genre outsider music **cannot be generalized** trough their track features. (decision tree)
-![](images/decisiontree.png)
-
-***
-
-![](images/decisiontreeeval.png)
-
-TEST TEXT
-
 ### All outdider musicians are **unique**, this means that the genre outsider music **cannot be generalized** trough their track features. (random forest)
-![](images/rforrestimportance.png)
-![](images/rforrestclusters.png)
+![](images/rforrestimportance.png){width=49%}
+![](images/rforrestclusters.png){width=49%}
 
 ***
 
-![](images/rforresteval.png)
+![](images/rforresteval.png){width=100%}
 
-TEST TEXT
+The second algorithm I used is the <a href="https://en.wikipedia.org/wiki/Random_forest">random forest classifier</a>. The most left plot show that acousticness, loudness and Spotify's timbre component 1 are the three most valuable features to distinguish the outsider musicians in the corpus. These features are plotted in the scatterplot next to it, here we can see that the there are five clearly distinguishable clusters, and one cluster that is in the middle of the other five, this is the cluster belonging to _Life in the USA and Canada_. This observation is also noted in the recall and precision scores, as there we can see that _Life in the USA and Canada_ scores the lowest in both measures. The other five albums perform well in both measures, indicating that the algorithm can confidently classify these songs to their respective album and artist. 
+
+Overall the random forest classifier performs slightly better than the KNN classifier, as it scores a higher average precision of 0.82 versus 0.77 and a higher average recall of 0.81 versus 0.77. Both algorithms have a lot of difficulty with classifying _Life in the USA and Canada_, leaving this album out of the corpus would yield much higher evaluation scores.  
+
+However, both algorithms show that it possible to accurately classify the outsider musicians in the corpus. The implication being that there is enough of a difference between all of the artists to accurately classify them. This in turn means that **it is difficult to generalize them trough their computational musical features.** 
+
+***
+
+**List of abbreviations:**
+
+ - EIB = Eilert Is Back, Eilert Pilarm
+ - GBTT = God Bless Tiny Tim, Tiny Tim
+ - LitUaC = Life in the USA and Canada, B.J. Snowden
+ - Potw = Philosophy of the World, The Shaggs
+ - Y/JM = Yip/Jump Muisc, Daniel Johnson
 
 
 
