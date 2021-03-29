@@ -450,8 +450,6 @@ outsiders %>%
 
 My final comparison takes a look at Spotify's Timbre coefficients, from the plot of these coefficients we can observe two things. The first is that the mean of all of the coefficients is relatively similar for both artists. Second is that the variance, for the c02, c03, c04 and c05 is higher for Elvis. This means that **the two have a very similar timbre**, and that Elvis perhaps has more outliers when it comes to the mentioned coefficients. 
 
-***
-
 Overall it seems like there is little difference between Eilert and Elivs, when we look at the computational musical features. When listing to the two the obvious difference is Eilert's thick Swedish accent, this is perhaps a feature that isn't well represented yet, and thus **from an computational musicologists perspective there isn't much difference between the two.** 
 
 
@@ -901,60 +899,6 @@ When we compare Daniel Johnson's chromagrams to some of his outsider peers', his
 
 ```{r, echo = FALSE, message = FALSE}
 
-batman <-
-  get_tidy_audio_analysis("2Od8Vrqg0SAqVTLMHCMmWU") %>%
-  compmus_align(bars, segments) %>%
-  select(bars) %>%
-  unnest(bars) %>%
-  mutate(
-    pitches =
-      map(segments,
-        compmus_summarise, pitches,
-        method = "acentre", norm = "manhattan"
-      )
-  ) %>%
-  mutate(
-    timbre =
-      map(segments,
-        compmus_summarise, timbre,
-        method = "mean"
-      )
-  )
-bind_rows(
-  batman %>%
-    compmus_self_similarity(pitches, "aitchison") %>%
-    mutate(d = d / max(d), type = "Chroma"),
-  batman %>%
-    compmus_self_similarity(timbre, "euclidean") %>%
-    mutate(d = d / max(d), type = "Timbre")
-) %>%
-  mutate() %>%
-  ggplot(
-    aes(
-      x = xstart + xduration / 2,
-      width = xduration,
-      y = ystart + yduration / 2,
-      height = yduration,
-      fill = d
-    )
-  ) +
-  geom_tile() +
-  coord_fixed() +
-  facet_wrap(~type) +
-  scale_fill_viridis_c(guide = "none") +
-  theme_classic() +
-  labs(x = "", y = "")
-```
-
-***
-I think you have gotten into the rhythm of things as of now, so next is Wesley Willis. I've already mentioned that Wesley Willis' songs all sound exactly the same, which also shows in the coheisiveness plot. The main difference between songs is the lyrical content, although Willis has made several songs about "whipping" other superhero asses, such as Superman's, Spiderman's and Robin's (fun fact: Wesley Willis has one song in which he gets his ass whipped: _Birdman Kicked My Ass_). Each song consists of six lines repeating the song title (like "I Whipped Batman's Ass"), three sentences of story telling ()  
-
-To 
-
-### All **Wesley Willis** songs are the same. (pt. 2)
-
-```{r, echo = FALSE, message = FALSE}
-
 chronic <-
   get_tidy_audio_analysis("0W463BKzugSbTS6qCl1Vq9") %>%
   compmus_align(bars, segments) %>%
@@ -997,57 +941,28 @@ bind_rows(
   facet_wrap(~type) +
   scale_fill_viridis_c(guide = "none") +
   theme_classic() +
-  labs(x = "", y = "")
+  labs(title="Chronic Schizophrenia", x = "", y = "")
 ```
 
-### All **Wesley Willis** songs are the same. (pt. 3)
+***
+I think you have gotten into the rhythm of things as of now, so next is Wesley Willis. I've already mentioned that Wesley Willis' songs all sound exactly the same, which also shows in the coheisiveness plot. The main difference between songs is the lyrical content, although Willis has made several songs about "whipping" other superhero asses, such as Superman's, Spiderman's and Robin's (fun fact: Wesley Willis has one song in which he gets his ass whipped: _Birdman Kicked My Ass_). Each song consists of a number of lines repeating the song title (like "I Whipped Batman's Ass"); three or four sentences of story-telling (like explaining why he hates Batman or how he wipped his ass); another repetition of the song title; another part of story-telling; and then finally, another section of repeating the song title.  
 
-```{r, echo = FALSE, message = FALSE}
+To find some of these structures we can analyze two Self-Similarity Matrices (SSM) of Willis' _Chronic Schizophrenia_. SSMs are an MIR technique used to find musical structures and relations, the idea is to compare a feature on one specific point in a track to the same feature throughout the entire track. In the plot this is visualized by plotting all of the feature values on both the x- and y-axis (in the SSMs on the left this is done for the chroma and timbre features), the color is determined by the distance between every point in the plot (or matrix). 
 
-fiasco <-
-  get_tidy_audio_analysis("28GmmpvCQxa88rZdEntcYS") %>%
-  compmus_align(bars, segments) %>%
-  select(bars) %>%
-  unnest(bars) %>%
-  mutate(
-    pitches =
-      map(segments,
-        compmus_summarise, pitches,
-        method = "acentre", norm = "manhattan"
-      )
-  ) %>%
-  mutate(
-    timbre =
-      map(segments,
-        compmus_summarise, timbre,
-        method = "mean"
-      )
-  )
-bind_rows(
-  fiasco %>%
-    compmus_self_similarity(pitches, "aitchison") %>%
-    mutate(d = d / max(d), type = "Chroma"),
-  fiasco %>%
-    compmus_self_similarity(timbre, "euclidean") %>%
-    mutate(d = d / max(d), type = "Timbre")
-) %>%
-  mutate() %>%
-  ggplot(
-    aes(
-      x = xstart + xduration / 2,
-      width = xduration,
-      y = ystart + yduration / 2,
-      height = yduration,
-      fill = d
-    )
-  ) +
-  geom_tile() +
-  coord_fixed() +
-  facet_wrap(~type) +
-  scale_fill_viridis_c(guide = "none") +
-  theme_classic() +
-  labs(x = "", y = "")
-```
+The timbre-based SSM of _Chronic Schizophrenia_ clearly show the sections where the song title gets repeated for a number of times. This can be seen by the three checkerboard patterns on the diagonal, which are at 25-42s; 60-77s; and 148-165. All of these time intervals are 17 seconds, which indicates that in this case the song title gets repeated an equal number of times (this is true because the tempo of the song does not change throughout, this will be further explored in the next section). The space between the second and third checkerboard pattern (77-148s) is characterized by a long instrumental followed by a portion of story-telling, the exact length of the instrumental can be seen on the chroma-based SSM by the checkerboard pattern on the diagonal at 77-132s. 
+Overall the timbre-based SSM shows the structure of this song the best. I will try to explain, if we try our best to detect nine boxes on the diagonal, we can see: 
+
+ - box 1: showing the intro instrumental (0-11s). 
+ - box 2: showing the first section of story-telling (11-25s).
+ - box 3: showing the first section of repeating the song title (25-42s).
+ - box 4: showing the second section of story-telling (42-60s).
+ - box 5: showing the second section of repeating the song title (60-77s).
+ - box 6: showing the extended instrumental part (77-132s).
+ - box 7: showing the third section of story-telling (132-148s).
+ - box 8: showing the third section of repeating the song title (148-165s).
+ - box 9: showing the spoken word/instrumental outro. (165-187s).
+ 
+The SSMs show us that **there are clearly definable sections in Wesley Willis' music**, the highly structured nature of it is clearly audible, even a computational algorithm can figure that out. The sections mentioned are the building blocks for every Willis song, the difference often comes in the length of the sections or the omittance/addition of an extended instrumental (another minor difference can be the omittance/addition of spoken words on the intro/outro). However, **the order of the sections rarely change**, this is a large contributor to the fact that all of Wesley Willis' music sounds very similar. 
 
 ### All **Wesley Willis** songs are the same. (pt. 2)
 ![](images/willistempos.jpg){width=100%}
