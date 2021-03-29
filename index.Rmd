@@ -947,7 +947,7 @@ bind_rows(
 ```
 
 ***
-I think you have gotten into the rhythm of things as of now, so next is Wesley Willis. I've already mentioned that Wesley Willis' songs all sound exactly the same, which also shows in the coheisiveness plot. The main difference between songs is the lyrical content, although Willis has made several songs about "whipping" other superhero asses, such as Superman's, Spiderman's and Robin's (fun fact: Wesley Willis has one song in which he gets his ass whipped: _Birdman Kicked My Ass_).  
+I think you have gotten into the rhythm of things as of now, so next is Wesley Willis. I've already mentioned that Wesley Willis' songs all sound exactly the same, which also shows in the coheisiveness plot. The main difference between songs is the lyrical content, although Willis has made several songs about "whipping" other superhero asses, such as Superman's, Spiderman's and Robin's (fun fact: Wesley Willis has one song in which he gets his ass whipped: _Birdman Kicked My Ass_). Each song consists of six lines repeating the song title (like "I Whipped Batman's Ass"), three sentences of story telling ()  
 
 To 
 
@@ -1048,6 +1048,13 @@ bind_rows(
   theme_classic() +
   labs(x = "", y = "")
 ```
+
+### All **Wesley Willis** songs are the same. (pt. 2)
+![](images/willistempos.jpg){width=100%}
+
+***
+
+The tempograms from some Wesley Willis' songs also show that there is little variation in his music. In the tempograms we can see that each song has a consistent tempo throughout the entire track. There aren't any moments where the tempo gradually speeds up or slows down, this would be visualized in the tempograms if the consistent yellow line would curve up or down. The **consistent and rigid tempos** seen give us some insight into how Willis likes to make his music. It also **contributes to the notion that all Wesley Willis' songs sound very similar.** 
 
 ### **Tiny Tim** is the most succesful outsider mucisian, but why? (pt. 1)
 ![](images/novelty.jpg){width=100%}
@@ -1306,5 +1313,54 @@ snow %>%
   theme_classic()
 ```
 
+```{r eval=FALSE, include=FALSE}
+will <- get_tidy_audio_analysis("2Od8Vrqg0SAqVTLMHCMmWU")
 
+will %>%
+  tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) %>%
+  ggplot(aes(x = time, y = bpm, fill = power)) +
+  geom_raster() +
+  scale_fill_viridis_c(guide = "none") +
+  labs(title="I Whipped Batman's Ass", x = "Time (s)", y = "Tempo (BPM)") +
+  theme_classic()
 
+```
+
+```{r eval=FALSE, include=FALSE}
+will2 <- get_tidy_audio_analysis("050aTyQRQC3MKrcc9VVtH4")
+
+will2 %>%
+  tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) %>%
+  ggplot(aes(x = time, y = bpm, fill = power)) +
+  geom_raster() +
+  scale_fill_viridis_c(guide = "none") +
+  labs(title="Shit & Fuck", x = "Time (s)", y = "Tempo (BPM)") +
+  theme_classic()
+
+```
+
+```{r eval=FALSE, include=FALSE}
+will3 <- get_tidy_audio_analysis("39fFiArUbCi6k0DydtiWHR")
+
+will3 %>%
+  tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) %>%
+  ggplot(aes(x = time, y = bpm, fill = power)) +
+  geom_raster() +
+  scale_fill_viridis_c(guide = "none") +
+  labs(title="Vampire Bat", x = "Time (s)", y = "Tempo (BPM)") +
+  theme_classic()
+
+```
+
+```{r eval=FALSE, include=FALSE}
+will4 <- get_tidy_audio_analysis("7bGS58EPXIDo10AkKzSXzr")
+
+will4 %>%
+  tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) %>%
+  ggplot(aes(x = time, y = bpm, fill = power)) +
+  geom_raster() +
+  scale_fill_viridis_c(guide = "none") +
+  labs(title="He Goes To Prison", x = "Time (s)", y = "Tempo (BPM)") +
+  theme_classic()
+
+```
